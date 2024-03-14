@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.Login {
+  margin: 10vh auto;
+  width: 40vw;
+  height: 80vh;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(190, 187, 187, 0.6);
+  display: flex;
+}
+.from-group {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.from-control {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.login-content {
+  width: 100%;
+  text-align: center;
+}
+.btn-log {
+  border-radius: 5px;
+  position: absolute;
+  top: 30%;
+}

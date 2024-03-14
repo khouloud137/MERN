@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,99,300..800;1,99,300..800&display=swap");
+.navbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  height: 25vh;
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  margin: 18px;
+  gap: 30px;
+}
+
+.link_nav {
+  margin: auto;
+  background-color: black;
+  border-radius: 100px;
+}
+.link_nav .nav__NAv {
+  text-transform: uppercase;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 110%;
+  text-decoration: none;
+  color: white;
+}
+/* .form-input {
+} */
+.input {
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 0 30px;
+  background: #100e0e;
+  border: 0;
+  border-radius: 100px;
+  color: #fff;
+  border: 1px solid white;
+  line-height: 1.15;
+  margin: 0;
+  font-size: 100%;
+  z-index: 1;
+  width: calc(100% - 105px);
+}
+.btn_icon {
+  font-weight: 600;
+}
+.form-btn {
+  right: 0;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 105px;
+  height: 100%;
+  border-radius: 100px;
+  border: 1px solid #f5ff78;
+  cursor: pointer;
+  background: #f5ff78;
+  color: #100e0e;
+  line-height: 1.15;
+  margin: 0;
+  font-size: 100%;
+  overflow: visible;
+  text-transform: none;
+}
+.form-input {
+  border: 1px solid #fff;
+  border-radius: 100px;
+  color: #fff;
+  height: 55px;
+  position: relative;
+  
+}
+.btn-search {
+  /* border: none; */
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  top: 22px;
+  padding: 0px;
+  border-radius: 100%;
+  background-color: black;
+  margin: 20px;
+
+}
+.btn-search svg {
+  font-size: 40px;
+  border: none;
+  color: #f5ff78;
+}
+
