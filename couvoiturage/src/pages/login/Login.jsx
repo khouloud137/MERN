@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import { useDispatch } from "react-redux";
 import "./Login.css";
+import { UserLogin } from "../../redux/actions";
 
 function Login() {
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.authReducer);
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+  const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
   });
@@ -17,11 +22,11 @@ function Login() {
   const formvalidation = () => {
     let status = true;
     let localErrors = {};
-    if (user.email === "") {
+    if (userLogin.email === "") {
       localErrors.email = "Email required !";
       status = false;
     }
-    if (user.password === "") {
+    if (userLogin.password === "") {
       localErrors.password = "Password required  and min a 8!";
       status = false;
     }
@@ -31,25 +36,13 @@ function Login() {
   };
   function handelLogin(e) {
     e.preventDefault();
+   
     setErrors({});
     formvalidation();
 
     if (formvalidation()) {
-      axios
-        .post("http://localhost:8000/users/signin", user)
-        .then((result) => {
-          setUser(result);
-
-          localStorage.setItem("user_data", JSON.stringify(result.data.user));
-          localStorage.setItem("token", result.data.token);
-          toast.success(" user Login!");
-
-          navigate("/publications");
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error(err.message);
-        });
+       dispatch(UserLogin(userLogin));
+      
     } else {
       console.log(errors);
     }
@@ -71,7 +64,7 @@ function Login() {
             type="email"
             placeholder="type your email..."
             onChange={(e) => {
-              setUser({ ...user, email: e.target.value });
+              setUserLogin({ ...userLogin, email: e.target.value });
             }}
           />
           {errors.email && (
@@ -88,7 +81,7 @@ function Login() {
             type="password"
             placeholder="type your password..."
             onChange={(e) => {
-              setUser({ ...user, password: e.target.value });
+              setUserLogin({ ...userLogin, password: e.target.value });
             }}
           />
           {errors.password && (
@@ -101,6 +94,9 @@ function Login() {
           Sign In
         </button>
       </form>
+      {authState.loading && <div>Connexion en cours...</div>}
+      {authState.errors && <div>Erreur : {authState.errors}</div>}
+      {authState.user && <div>Bienvenue, {authState.user.firstname}</div>}
     </div>
   );
 }

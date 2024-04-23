@@ -29,8 +29,8 @@ function Navbar() {
               Publications
             </NavLink>
 
-            <NavLink to="/contact" className="nav__NAv">
-              CONTACT
+            <NavLink to="/profile" className="nav__NAv">
+              Profile
             </NavLink>
             <NavLink to="/register" className="nav__NAv">
               Register

@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import axios from "axios";
-import { useNavigate ,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { UserRegister } from "../../redux/actions";
+import { useDispatch  } from "react-redux";
 
 function Register() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+  
+  const [userRegister, setUserRegister] = useState({
     firstname: "",
     lastname: "",
     email: "",
@@ -13,27 +17,28 @@ function Register() {
     bio: "",
     birthdate: "",
   });
+ 
   const [errors, setErrors] = useState({});
   const formvalidation = () => {
     let status = true;
     let localErrors = {};
-    if (user.firstname == "") {
+    if (userRegister.firstname == "") {
       localErrors.firstname = "firstname required !";
       status = false;
     }
-    if (user.lastname == "") {
+    if (userRegister.lastname == "") {
       localErrors.lastname = " lastname required !";
       status = false;
     }
-    if (user.email == "") {
+    if (userRegister.email == "") {
       localErrors.email = "Email required !";
       status = false;
     }
-    if (user.password == "") {
+    if (userRegister.password == "") {
       localErrors.password = "Password required  and min a 8!";
       status = false;
     }
-    if (user.bio == "") {
+    if (userRegister.bio == "") {
       localErrors.bio = "Bio required !";
       status = false;
     }
@@ -45,21 +50,9 @@ function Register() {
     e.preventDefault();
     setErrors({});
     formvalidation();
-    console.log(user);
+
     if (formvalidation()) {
-      axios
-        .post("http://localhost:8000/users/signup",user)
-        .then((result) => {
-          setUser(result);
-
-          toast.success(" user created Successfully!");
-
-          navigate("/login");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
+      dispatch(UserRegister(userRegister));
     }
   }
   return (
@@ -79,7 +72,10 @@ function Register() {
                 type="text"
                 placeholder="type your firstname..."
                 onChange={(e) => {
-                  setUser({ ...user, firstname: e.target.value });
+                  setUserRegister({
+                    ...userRegister,
+                    firstname: e.target.value,
+                  });
                 }}
               />
               {errors.firstname && (
@@ -96,7 +92,10 @@ function Register() {
                 type="text"
                 placeholder="type your lastname..."
                 onChange={(e) => {
-                  setUser({ ...user, lastname: e.target.value });
+                  setUserRegister({
+                    ...userRegister,
+                    lastname: e.target.value,
+                  });
                 }}
               />
               {errors.lastname && (
@@ -113,7 +112,7 @@ function Register() {
                 type="email"
                 placeholder="type your email..."
                 onChange={(e) => {
-                  setUser({ ...user, email: e.target.value });
+                  setUserRegister({ ...userRegister, email: e.target.value });
                 }}
               />
 
@@ -130,7 +129,10 @@ function Register() {
                 type="password"
                 placeholder="type your password..."
                 onChange={(e) => {
-                  setUser({ ...user, password: e.target.value });
+                  setUserRegister({
+                    ...userRegister,
+                    password: e.target.value,
+                  });
                 }}
               />
               {errors.password && (
@@ -146,7 +148,7 @@ function Register() {
                 type=""
                 placeholder="type your Bio..."
                 onChange={(e) => {
-                  setUser({ ...user, bio: e.target.value });
+                  setUserRegister({ ...userRegister, bio: e.target.value });
                 }}
               ></textarea>
               {errors.bio && (
@@ -155,7 +157,9 @@ function Register() {
                 </div>
               )}
             </div>
-<p>if you acount <Link to='/login'>login here</Link></p>
+            <p>
+              if you acount <Link to="/login">login here</Link>
+            </p>
             <button className="btn sigup" onClick={(e) => handelRegister(e)}>
               Sign up
             </button>
