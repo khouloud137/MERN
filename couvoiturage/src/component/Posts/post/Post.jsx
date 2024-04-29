@@ -14,6 +14,9 @@ function Post({
   lastname,
   createdAt,
 }) {
+  const userImage = JSON.parse(
+    localStorage.getItem("user_data")
+  ).profilePicture;
   const originalDate = new Date(createdAt);
 
   const year = originalDate.getFullYear();
@@ -27,7 +30,7 @@ function Post({
       <div className="post">
         <div className="post_user_details">
           <div className="user_image">
-            <img src="https://images.pexels.com/photos/20192525/pexels-photo-20192525/free-photo-of-mode-gens-femme-jeune-fille.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <img src={userImage} alt="Profile" />
           </div>
           <div className="user_name">
             <h5>

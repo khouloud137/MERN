@@ -45,14 +45,21 @@ exports.signin = async (req, res) => {
         process.env.CLE,
         { expiresIn: "1h" }
       );
-      const { id, firstname, lastname, email, bio, birthdate } = user;
-      return res
-        .status(200)
-        .json({
-          message: "success...",
-          token: token,
-          user: { id, firstname, lastname, email, bio, birthdate },
-        });
+      const { id, firstname, lastname, email, bio, birthdate, profilePicture } =
+        user;
+      return res.status(200).json({
+        message: "success...",
+        token: token,
+        user: {
+          id,
+          firstname,
+          lastname,
+          email,
+          bio,
+          birthdate,
+          profilePicture,
+        },
+      });
     }
   });
 };

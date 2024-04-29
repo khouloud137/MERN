@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const uerSchema = new mongoose.Schema({
   firstname: String,
   lastname: String,
-  image:{type:String,default:"/assets/DefaultUser.png" },
-  email:{
-    type:String,
-    unique:true
-  } ,
+  profilePicture: { type: String, default: "/assets/DefaultUser.png" },
+  email: {
+    type: String,
+    unique: true,
+  },
   password: String,
   role: {
     type: String,
@@ -15,7 +15,6 @@ const uerSchema = new mongoose.Schema({
     default: "user",
   },
 
-  
   picture: String,
   birthdate: Date,
 });
