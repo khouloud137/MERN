@@ -1,7 +1,5 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-
-
+import apiClient from "../../utility/apiClient";
 const UserLoginRequest = () => {
   return {
     type: "USERLOGIN-REQUEST",
@@ -21,18 +19,16 @@ const UserLoginSuccess = (payload) => {
 };
 
 export const UserLogin = (payload) => {
-  return  (dispatch) => {
+  return (dispatch) => {
     dispatch(UserLoginRequest());
-    return axios
-      .post("http://localhost:8000/users/signin", payload)
+    return apiClient
+      .post("/users/signin", payload)
       .then((result) => {
         dispatch(UserLoginSuccess(result));
+        // console.log(result);
         localStorage.setItem("user_data", JSON.stringify(result.data.user));
         localStorage.setItem("token", result.data.token);
         // toast.success(" user Login!");
-
-navigate('/profile')
-       
       })
       .catch((err) => {
         dispatch(UserLoginErrors(err));
@@ -57,22 +53,18 @@ const UserRegisterSuccess = (payload) => {
     payload,
   };
 };
-export const UserRegister= (payload) => {
-  return(dispatch) => {
-    dispatch(UserRegisterRequest())
-    return axios
-      .post("http://localhost:8000/users/signup", payload)
+export const UserRegister = (payload) => {
+  return (dispatch) => {
+    dispatch(UserRegisterRequest());
+    return apiClient
+      .post("/users/signup", payload)
       .then((result) => {
         dispatch(UserRegisterSuccess(result));
 
         // toast.success(" user created Successfully!");
-
-        //  navigate("/login");
       })
       .catch((err) => {
-        dispatch(UserRegisterErrors(err))
+        dispatch(UserRegisterErrors(err));
       });
-  
   };
 };
-

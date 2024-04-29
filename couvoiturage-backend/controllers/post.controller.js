@@ -2,7 +2,7 @@ const POST = require("../models/posts.model");
 
 exports.GetAllposts = async (req, res) => {
   try {
-    const post = await POST.find();
+    const post = await POST.find().populate("creator", "firstname lastname id");
     res.json({ status: "success", data: post });
   } catch (err) {
     res.status(500).json({ status: "error", message: "error" });
@@ -10,8 +10,10 @@ exports.GetAllposts = async (req, res) => {
 };
 
 exports.AddPost = async (req, res) => {
+  
+  const postData = { ...req.body, creator: req.user.data.id };
   try {
-    const post = await POST.create(req.body);
+    const post = await POST.create(postData);
     if (post) {
       res.json({ status: "success", message: "post added" });
     } else {
@@ -37,10 +39,14 @@ exports.DeletePost = async (req, res) => {
 };
 exports.UpdatePost = async (req, res) => {
   const params = req.params;
-  const updatepost= req.body;
+  const updatepost = req.body;
   try {
-    const post = await POST.findByIdAndUpdate(params.id,{updatepost},{new:true});
-console.log(updatepost)
+    const post = await POST.findByIdAndUpdate(
+      params.id,
+      { updatepost },
+      { new: true }
+    );
+    console.log(updatepost);
     if (post) {
       res.json({ status: "success", message: "post updated" });
     } else {

@@ -30,8 +30,9 @@ function StoryList() {
     <>
       <div className="stories">
         <Story type="new" />
-        {stories.map((story) => (
-          <Story type="old" data={story} />
+        {stories.map((story,index) => (
+          <Story type="old" data={story}
+          key={index} />
         ))}
       </div>
     </>

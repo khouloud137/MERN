@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+//  import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import "./Login.css";
@@ -9,8 +9,8 @@ import { UserLogin } from "../../redux/actions";
 
 function Login() {
   const dispatch = useDispatch();
-  const authState = useSelector((state) => state.authReducer);
-  const navigate = useNavigate();
+  // const authState = useSelector((state) => state.authReducer);
+  // const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
@@ -36,13 +36,12 @@ function Login() {
   };
   function handelLogin(e) {
     e.preventDefault();
-   
+
     setErrors({});
     formvalidation();
 
     if (formvalidation()) {
-       dispatch(UserLogin(userLogin));
-      
+      dispatch(UserLogin(userLogin));
     } else {
       console.log(errors);
     }
@@ -94,9 +93,9 @@ function Login() {
           Sign In
         </button>
       </form>
-      {authState.loading && <div>Connexion en cours...</div>}
+      {/* {authState.loading && <div>Connexion en cours...</div>}
       {authState.errors && <div>Erreur : {authState.errors}</div>}
-      {authState.user && <div>Bienvenue, {authState.user.firstname}</div>}
+      {authState.user && <div>Bienvenue, {authState.user.firstname}</div>} */}
     </div>
   );
 }

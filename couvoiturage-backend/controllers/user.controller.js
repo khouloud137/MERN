@@ -12,25 +12,27 @@ exports.signup = async (req, res) => {
     bio: req.body.bio,
     birthdate: req.body.birthdate,
   };
+  const validemail = await User.findOne({ email: data.email });
+  if (!validemail) {
+    const _user = new User(data);
+    await _user
+      .save()
+      .then(() => {
+        res.status(200).json({ message: "user added successfully..." });
+      })
+      .catch((error) => {
+        res.status(400).json({ message: "error added..." });
 
-  console.log(req.body);
-  const _user = new User(data);
-  await _user
-    .save()
-    .then(() => {
-      res.status(200).json({ message: "user added successfully..." });
-    })
-    .catch((error) => {
-      res.status(400).json({ message: "error added..." });
-
-      console.log(error);
-    });
+        console.log(error);
+      });
+  } else {
+    res.status(400).json({ message: "invalid email..." });
+  }
 };
 
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
-console.log(email)
   if (!user) {
     return res.json({ message: "email Invalid..." });
   }
@@ -43,9 +45,14 @@ console.log(email)
         process.env.CLE,
         { expiresIn: "1h" }
       );
+      const { id, firstname, lastname, email, bio, birthdate } = user;
       return res
         .status(200)
-        .json({ message: "success...", token: token, user: user });
+        .json({
+          message: "success...",
+          token: token,
+          user: { id, firstname, lastname, email, bio, birthdate },
+        });
     }
   });
 };

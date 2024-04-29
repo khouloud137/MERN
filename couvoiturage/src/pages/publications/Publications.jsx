@@ -4,6 +4,7 @@ import SideBar from "../../component/Sidebar/SideBar";
 import "../../pages/publications/Publication.css";
 import StoryList from "../../component/Stories/StoryList";
 import Posts from "../../component/Posts/Posts";
+
 function Publications() {
   return (
     <div className="publication_container">
@@ -16,6 +17,7 @@ function Publications() {
         <div style={{ width: "50%" }}>
           {/* Middel Box */}
           <StoryList />
+
           <Posts />
         </div>
         <div style={{ width: "25%" }}>

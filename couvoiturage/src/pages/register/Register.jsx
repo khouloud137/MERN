@@ -1,14 +1,13 @@
-import React, { useState,useEffect} from "react";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import React, { useState } from "react";
+// import axios from "axios";
+import { Link } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { UserRegister } from "../../redux/actions";
-import { useDispatch  } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function Register() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  
+
   const [userRegister, setUserRegister] = useState({
     firstname: "",
     lastname: "",
@@ -17,12 +16,12 @@ function Register() {
     bio: "",
     birthdate: "",
   });
- 
+
   const [errors, setErrors] = useState({});
   const formvalidation = () => {
     let status = true;
     let localErrors = {};
-    if (userRegister.firstname == "") {
+    if (userRegister.firstname === "") {
       localErrors.firstname = "firstname required !";
       status = false;
     }
