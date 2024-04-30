@@ -1,8 +1,8 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 exports.signup = async (req, res) => {
-  console.log(req.body);
   const data = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -42,8 +42,7 @@ exports.signin = async (req, res) => {
     } else {
       const token = jwt.sign(
         { data: { id: user._id, role: user.role } },
-        process.env.CLE,
-        { expiresIn: "1h" }
+        process.env.CLE
       );
       const { id, firstname, lastname, email, bio, birthdate, profilePicture } =
         user;

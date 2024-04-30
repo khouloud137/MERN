@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-// import axios from "axios";
-import { Link } from "react-router-dom";
+import "./Register.css";
+import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { UserRegister } from "../../redux/actions";
+import {
+  UserRegisterErrors,
+  UserRegisterRequest,
+  UserRegisterSuccess,
+} from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import apiClient from "../../utility/apiClient";
 
 function Register() {
   const dispatch = useDispatch();
@@ -16,8 +21,9 @@ function Register() {
     bio: "",
     birthdate: "",
   });
-
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+
   const formvalidation = () => {
     let status = true;
     let localErrors = {};
@@ -25,19 +31,19 @@ function Register() {
       localErrors.firstname = "firstname required !";
       status = false;
     }
-    if (userRegister.lastname == "") {
+    if (userRegister.lastname === "") {
       localErrors.lastname = " lastname required !";
       status = false;
     }
-    if (userRegister.email == "") {
+    if (userRegister.email === "") {
       localErrors.email = "Email required !";
       status = false;
     }
-    if (userRegister.password == "") {
+    if (userRegister.password === "") {
       localErrors.password = "Password required  and min a 8!";
       status = false;
     }
-    if (userRegister.bio == "") {
+    if (userRegister.bio === "") {
       localErrors.bio = "Bio required !";
       status = false;
     }
@@ -45,15 +51,27 @@ function Register() {
     setErrors(localErrors);
     return status;
   };
+
   function handelRegister(e) {
     e.preventDefault();
     setErrors({});
-    formvalidation();
+    const isValid = formvalidation();
 
-    if (formvalidation()) {
-      dispatch(UserRegister(userRegister));
+    if (isValid) {
+      dispatch(UserRegisterRequest());
+      return apiClient
+        .post("/users/signup", userRegister)
+        .then((result) => {
+          dispatch(UserRegisterSuccess(result));
+          navigate("/login");
+          // toast.success(" user created Successfully!");
+        })
+        .catch((err) => {
+          dispatch(UserRegisterErrors(err));
+        });
     }
   }
+
   return (
     <div className="register">
       <Toaster />
@@ -65,7 +83,7 @@ function Register() {
         <div>
           <form className="form">
             <div className="form-group">
-              <label> firstname </label>
+              <label> first name </label>
               <input
                 className="input"
                 type="text"
@@ -78,14 +96,17 @@ function Register() {
                 }}
               />
               {errors.firstname && (
-                <div style={{ textAlign: "lefet", color: "orangered" }}>
+                <div
+                  className="authErrors"
+                  style={{ textAlign: "lefet", color: "orangered" }}
+                >
                   {errors.firstname}
                 </div>
               )}
             </div>
 
             <div className="form-group">
-              <label> Lastname </label>
+              <label> Last name </label>
               <input
                 className="input"
                 type="text"
@@ -98,14 +119,17 @@ function Register() {
                 }}
               />
               {errors.lastname && (
-                <div style={{ textAlign: "lefet", color: "orangered" }}>
+                <div
+                  className="authErrors"
+                  style={{ textAlign: "lefet", color: "orangered" }}
+                >
                   {errors.lastname}
                 </div>
               )}
             </div>
 
             <div className="form-group">
-              <label> Email</label>
+              <label>Email</label>
               <input
                 className="input"
                 type="email"
@@ -116,13 +140,16 @@ function Register() {
               />
 
               {errors.email && (
-                <div style={{ textAlign: "lefet", color: "orangered" }}>
+                <div
+                  className="authErrors"
+                  style={{ textAlign: "lefet", color: "orangered" }}
+                >
                   {errors.email}
                 </div>
               )}
             </div>
             <div className="form-group">
-              <label> Password </label>
+              <label>Password </label>
               <input
                 className="input"
                 type="password"
@@ -135,7 +162,10 @@ function Register() {
                 }}
               />
               {errors.password && (
-                <div style={{ textAlign: "lefet", color: "orangered" }}>
+                <div
+                  className="authErrors"
+                  style={{ textAlign: "lefet", color: "orangered" }}
+                >
                   {errors.password}
                 </div>
               )}
@@ -151,18 +181,27 @@ function Register() {
                 }}
               ></textarea>
               {errors.bio && (
-                <div style={{ textAlign: "lefet", color: "orangered" }}>
+                <div
+                  className="authErrorsForBio"
+                  style={{ textAlign: "lefet", color: "orangered" }}
+                >
                   {errors.bio}
                 </div>
               )}
             </div>
-            <p>
-              if you acount <Link to="/login">login here</Link>
+            <p className="auth-linking">
+              if you have an acount already <Link to="/login">login here</Link>
             </p>
-            <button className="btn sigup" onClick={(e) => handelRegister(e)}>
+            <button
+              className="authBtn btn sigup"
+              onClick={(e) => handelRegister(e)}
+            >
               Sign up
             </button>
           </form>
+          <Link to={"/"} className="backHomeBtn">
+            <b>Back home</b>
+          </Link>
         </div>
       </div>
     </div>

@@ -2,14 +2,18 @@ import React from "react";
 import "./Style.css";
 
 function UserNameProfile() {
+  const user = JSON.parse(localStorage.getItem("user_data"));
+
   return (
     <>
       <div className="username-profile">
         <div className="username-profile-image">
-          <img src="https://images.pexels.com/photos/20192525/pexels-photo-20192525/free-photo-of-mode-gens-femme-jeune-fille.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+          <img src={user.profilePicture} alt="" />
         </div>
         <div className="username-profile-info">
-          <h3 className="username"> khouloud Gouttai </h3>
+          <h3 className="username">
+            {user.firstname} {user.lastname}
+          </h3>
         </div>
       </div>
     </>

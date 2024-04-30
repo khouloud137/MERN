@@ -1,6 +1,17 @@
-.input{
-    padding: 10px;
-    margin: 20px;
-    width: 90%;
-    height: 50px;
+.publication_container {
+  min-height: 100vh;
+}
+.layout_app {
+  min-height: 100%;
+}
+.rightBox,
+.leftBox,
+.middelBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1%;
+  padding: 20px 0;
+  position: relative;
 }

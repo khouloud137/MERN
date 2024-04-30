@@ -1,4 +1,3 @@
-import axios from "axios";
 import apiClient from "../../utility/apiClient";
 import { fetchPosts } from "./getALLpostAction";
 
@@ -34,7 +33,7 @@ export const addPost = (postData) => {
         console.log(result);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         dispatch(addPostFailure(err.message));
       });
   };

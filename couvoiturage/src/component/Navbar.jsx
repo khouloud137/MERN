@@ -6,10 +6,16 @@ import { useState } from "react";
 
 function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
-
+  const user = JSON.parse(localStorage.getItem("user_data"));
   const toggleSearch = () => {
     setShowSearch(!showSearch);
-  }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user_data");
+    localStorage.removeItem("token");
+  };
+
   return (
     <>
       <div className="navbar-container">
@@ -32,9 +38,15 @@ function Navbar() {
             <NavLink to="/profile" className="nav__NAv">
               Profile
             </NavLink>
-            <NavLink to="/register" className="nav__NAv">
-              Register
-            </NavLink>
+            {user ? (
+              <NavLink to="/logout" className="nav__NAv" onClick={handleLogout}>
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink to="/register" className="nav__NAv">
+                Register
+              </NavLink>
+            )}
           </div>
         </div>
         <div className="search-btn">
@@ -57,7 +69,7 @@ function Navbar() {
         <div className="form-input">
           <input
             type="text"
-            className="input"
+            className="Homeinput"
             name="email"
             placeholder=" votre email"
           />

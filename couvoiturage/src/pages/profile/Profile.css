@@ -1,9 +1,4 @@
-.profile-container{
-    background-color: ;
-}
-
-.layout_app_profile{
-display: flex;
-flex-direction: row;
-
+.layout_app_profile {
+  display: flex;
+  flex-direction: row;
 }

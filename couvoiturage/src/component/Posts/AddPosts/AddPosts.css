@@ -1,0 +1,69 @@
+.AddPosts form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.AddPosts label {
+  margin-bottom: 10px;
+}
+
+.AddPosts .inputRow {
+  width: 100%;
+}
+
+.addPostInput {
+  height: 35px;
+  width: 47%;
+  border-radius: 10px;
+  background-color: #312a2a27;
+  border: none;
+  outline: none;
+  margin: 1%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  transition: all 0.5s;
+}
+.addPostInput:focus::placeholder {
+  color: rgb(187, 187, 187);
+}
+.addPostInput:focus {
+  color: white;
+  background: #312a2aa2;
+  box-shadow: inset 0 0 10px -5px rgb(0, 0, 0);
+}
+.AddPosts form > .addPostInput[type="time"] {
+  width: 25%;
+  text-align: center;
+}
+.new_post_buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin: 20px auto;
+}
+.new_post_buttons button {
+  width: 100px;
+  height: 40px;
+  border-radius: 30px;
+  border: 1px #312a2a solid;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.new_post_buttons #PostingBtn {
+  background-color: #f5ff78;
+}
+.new_post_buttons #PostingBtn:hover {
+  background-color: #312a2a;
+  color: white;
+}
+.new_post_buttons #CancelBtn {
+  background-color: #312a2a;
+  color: white;
+}
+.new_post_buttons #CancelBtn:hover {
+  background-color: #312a2ae3;
+}

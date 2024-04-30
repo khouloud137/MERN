@@ -18,11 +18,10 @@ const authReducer = (state = initialeState, action) => {
       };
 
     case "USERLOGIN-SUCCESS":
-      console.log(action.payload.data.user);
       return {
         ...state,
-        loading:false,
-        user:action.payload.data.user,
+        loading: false,
+        user: action.payload.data.user,
       };
     default:
       return state;

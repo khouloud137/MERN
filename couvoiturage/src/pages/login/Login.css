@@ -16,11 +16,43 @@ body {
   box-shadow: 0 0 5px rgba(190, 187, 187, 0.6);
   display: flex;
 }
-.from-group {
-  width: 80%;
+.login h1 {
+  text-align: center;
+}
+.login form {
+  width: 40vw;
+  height: 60vh;
+  margin: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.form-group {
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
+  text-align: left;
+  margin: 15px 0;
+  position: relative;
+}
+.form-group label {
+  margin-bottom: 5px;
+}
+.form-group .input {
+  padding: 20px;
+  width: 100%;
+  background: #100e0e;
+  height: 50px;
+  border-radius: 100px;
+  color: #fff;
+  line-height: 1.15;
+  border: 1px solid white;
+  outline: none;
+  transition: all 0.3s;
+}
+.form-group .input:focus {
+  background: #312a2a;
 }
 .from-control {
   padding: 5px;
@@ -36,4 +68,44 @@ body {
   border-radius: 5px;
   position: absolute;
   top: 30%;
+}
+.authBtn {
+  margin: auto;
+  border: none;
+  width: 100px;
+  height: 45px;
+  background: #312a2a;
+  border-radius: 30px;
+  cursor: pointer;
+  color: white;
+}
+.auth-linking {
+  text-align: center;
+}
+.auth-linking a {
+  color: inherit;
+}
+.authErrors {
+  position: absolute;
+  left: 0;
+  bottom: -30%;
+}
+.backHomeBtn {
+  position: fixed;
+  bottom: 5vh;
+  right: 2vw;
+  text-decoration: none;
+  color: #312a2a;
+  background-color: #f5ff78;
+  width: 120px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  transition: all 0.5s;
+}
+.backHomeBtn:hover {
+  background-color: #312a2a;
+  color: white;
 }

@@ -1,13 +1,16 @@
 import React from "react";
-import "./style.css";
+import "./SideBar.css";
 import { Link } from "react-router-dom";
+import UsernameCard from "../UsernameCard/Usernamecard";
 
 function SideBar() {
   return (
     <>
       <div className="sidebar">
         <div className="sidebar_menu">
-          <a>
+          <UsernameCard />
+          <hr />
+          <Link to="/" className="sideBarLinks">
             <svg
               className="me-3"
               xmlns="http://www.w3.org/2000/svg"
@@ -20,11 +23,10 @@ function SideBar() {
                 d="M13.796 4.136a2.5 2.5 0 0 0-3.592 0L5.405 9.092c-.275.284-.46.644-.532 1.034a28.756 28.756 0 0 0-.127 9.624l.176 1.13c.056.357.364.62.725.62H9a.5.5 0 0 0 .5-.5v-7h5v7a.5.5 0 0 0 .5.5h3.353a.733.733 0 0 0 .724-.62l.177-1.13a28.759 28.759 0 0 0-.127-9.624a2.007 2.007 0 0 0-.533-1.034z"
               />
             </svg>
-            <Link to="/">
-              <b>Home</b>
-            </Link>
-          </a>
-          <a>
+            <b>Home</b>
+          </Link>
+          <hr />
+          <Link to="/" className="sideBarLinks">
             <svg
               className="me-3"
               xmlns="http://www.w3.org/2000/svg"
@@ -38,8 +40,9 @@ function SideBar() {
               />
             </svg>
             <b>people</b>
-          </a>
-          <a>
+          </Link>
+          <hr />
+          <Link to="/" className="sideBarLinks">
             <svg
               className="me-3"
               xmlns="http://www.w3.org/2000/svg"
@@ -55,8 +58,9 @@ function SideBar() {
               />
             </svg>
             <b>photos</b>
-          </a>
-          <a>
+          </Link>
+          <hr />
+          <Link to="/publications" className="sideBarLinks">
             <svg
               className="me-3"
               xmlns="http://www.w3.org/2000/svg"
@@ -74,8 +78,9 @@ function SideBar() {
               </g>
             </svg>
             <b>New Feed</b>
-          </a>
-          <a>
+          </Link>
+          <hr />
+          <Link to="/profile" className="sideBarLinks">
             <svg
               className="me-3"
               xmlns="http://www.w3.org/2000/svg"
@@ -90,12 +95,10 @@ function SideBar() {
                 clipRule="evenodd"
               />
             </svg>
-            <Link to="/profile">
-              {" "}
-              <b>Profile</b>
-            </Link>
-          </a>
-          <a>
+            <b>Profile</b>
+          </Link>
+          <hr />
+          <Link to="/setting" className="sideBarLinks">
             <svg
               className="me-3"
               xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +114,7 @@ function SideBar() {
               />
             </svg>
             <b>setting</b>
-          </a>
+          </Link>
         </div>
       </div>
     </>

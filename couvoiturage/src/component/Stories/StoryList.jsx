@@ -26,6 +26,7 @@ function StoryList() {
         "https://i.pinimg.com/564x/93/c3/c1/93c3c128e5bc2eb69a051d5cbf3dbbac.jpg",
     },
   ];
+  
   return (
     <>
       <div className="stories">

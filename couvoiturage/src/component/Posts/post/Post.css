@@ -1,11 +1,14 @@
 .post {
   /* border: 1px solid black; */
-  max-width: 580px;
+  max-width: 100%;
   margin: 10px;
   color: black;
-  box-shadow: 0 1px 6px -4px #54595e;
+  box-shadow: 0 1px 10px -4px #54595e;
   padding: 10px;
+  box-sizing: border-box;
   border-radius: 10px;
+  /* background: url(https://freepngimg.com/download/icon/seo/442-announcement.png)
+    center/cover no-repeat; */
 }
 .post_user_details {
   display: flex;
@@ -16,21 +19,39 @@
   padding-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
+  min-height: 200px;
+  position: relative;
 }
-.post_user_details h5 , .post_content_details p{
-padding: 0;
-margin: 0;
+.post_content_details::before {
+  content: "";
+  background-image: url("https://freepngimg.com/download/icon/seo/442-announcement.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.09;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
 
+.post_user_details h5,
+.post_content_details p {
+  padding: 0;
+  margin: 0;
 }
-.post_content_details p{
+.post_content_details p {
   font-size: 13px;
   color: #a4a7a9;
   word-break: break-all;
 }
 
-.user_image{
+.user_image {
   object-fit: cover;
   overflow: hidden;
   width: 45px;
@@ -39,21 +60,43 @@ margin: 0;
   border-radius: 6px;
   margin-right: 10px;
 }
-.user_image img{
-  width:45px ;
+.user_image img {
+  width: 45px;
   height: 45px;
 }
-.user_name{
+.user_name {
   margin: 0;
   padding: 10px 0;
 }
-.user_name h5{
+.user_name h5 {
   font-size: 13px;
   margin: 0;
   padding: 0;
 }
-.user_name span{
+.user_name span {
   font-size: 10px;
   margin: 0;
   padding: 0;
+}
+.startingDate {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+.availablePlaces {
+  position: absolute;
+  top: 30%;
+  right: 2%;
+}
+.Price {
+  position: absolute;
+  bottom: 5%;
+  right: 2%;
+  font-weight: bold;
+}
+.post_content_details span {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #a4a7a954;
+  border-radius: 5px;
 }

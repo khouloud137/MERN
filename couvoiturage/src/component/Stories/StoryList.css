@@ -1,8 +1,9 @@
 .stories {
   display: flex;
-  margin: 10px;
-  max-width: 600px;
+  justify-content: center;
+  margin-bottom: 10px;
+  max-width: 100%;
   overflow: hidden;
-  padding: 10px 0;
- 
+  padding: 0 10px 10px 10px;
+  overflow-x: hidden;
 }

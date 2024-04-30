@@ -1,4 +1,3 @@
-import axios from "axios";
 import apiClient from "../../utility/apiClient";
 const GET_POST_REQUEST = () => {
   return { type: "GET_POST_REQUEST" };
@@ -6,7 +5,7 @@ const GET_POST_REQUEST = () => {
 const GET_POST_SUCCESS = (data) => {
   return {
     type: "GET_POST_SUCCESS",
-    payload:data,
+    payload: data,
   };
 };
 const GET_POST_FAILURE = (error) => {

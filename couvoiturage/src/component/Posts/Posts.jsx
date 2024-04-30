@@ -2,29 +2,26 @@ import React from "react";
 import "./Posts.css";
 import Post from "./post/Post";
 import NewPost from "./NewPost/NewPost";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../../redux/actions/getALLpostAction";
+
 function Posts() {
-  // const [posts, setPosts] = useState([]); //État pour stocker les posts
   const dispatch = useDispatch();
-  // const [loading, setLoading] = useState(true); // État de chargement
-  const [error, setError] = useState(null);
   const postsData = useSelector((state) => state.getposts);
-  // console.log(postsData);
+  const errors = useSelector((state) => state.getposts.errors);
   const loading = useSelector((state) => state.getposts.loading);
-  // console.log(loading) // État pour gérer les erreurs
+
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
+
   if (loading) {
-    return <p>Loading...</p>; // Affichage pendant le chargement
+    return <p>Loading...</p>;
   }
-
-  if (error) {
-    return <p>Error: {error}</p>; // Affichage en cas d'erreur
+  if (errors) {
+    return <p>Error: {errors}</p>;
   }
-
   return (
     <>
       <div className="posts">
@@ -39,6 +36,7 @@ function Posts() {
                 description={post.description}
                 adressePart={post.adressePart}
                 adresseArrive={post.adresseArrive}
+                date={post.date}
                 numplace={post.numplace}
                 firstname={post.creator.firstname}
                 lastname={post.creator.lastname}
