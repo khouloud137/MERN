@@ -56,3 +56,12 @@ exports.UpdatePost = async (req, res) => {
     res.status(500).json({ status: "error", message: "error" });
   }
 };
+exports.GetUserposts = async(req,res)=>{
+  const userID = req.user.data.id;
+  try {
+    const post = await POST.find({creator:userID}).populate("creator", "firstname lastname id");
+    res.json({ status: "success", data: post });
+  } catch (err) {
+    res.status(500).json({ status: "error", message: "error" });
+  }
+}

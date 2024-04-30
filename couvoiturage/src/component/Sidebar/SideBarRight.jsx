@@ -5,7 +5,7 @@ import FilterSearch from "../FilterSearch/FilterSearch";
 function SideBarRight() {
   return (
     <div className="SideBarRight">
-      <input className="PublicationsInput" placeholder="Search..." />
+      <input className="PublicationsInput" placeholder="Search..."  />
      
       <FilterSearch />
     </div>

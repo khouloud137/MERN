@@ -7,4 +7,5 @@ router.get("/GetAllposts", verifyToken, postController.GetAllposts);
 router.post("/AddPost", verifyToken, postController.AddPost);
 router.delete("/DeletePost/:id", verifyToken, postController.DeletePost);
 router.put("/UpdatePost/:id", verifyToken, postController.UpdatePost);
+router.get("/GetUserposts",verifyToken,postController.GetUserposts);
 module.exports = router;

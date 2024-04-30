@@ -5,10 +5,12 @@ import { combineReducers } from "redux";
 import authReducer from "./reducer/authReducer";
 import getReducer from "./reducer/getReducer";
 import postReducer from "./reducer/postsReducer";
+import userReducer from "./reducer/userReducer";
 const rootReducer = combineReducers({
   getposts: getReducer,
   postsActions: postReducer,
   users: authReducer,
+  getuserposts:userReducer,
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

@@ -27,7 +27,7 @@ function Posts() {
       <div className="posts">
         <NewPost />
         {postsData.posts &&
-          postsData.posts.map((post, index) => {
+          postsData.posts.toReversed().map((post, index) => {
             return (
               <Post
                 key={index}

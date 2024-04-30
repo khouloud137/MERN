@@ -1,5 +1,6 @@
 import apiClient from "../../utility/apiClient";
 import { fetchPosts } from "./getALLpostAction";
+import { fetchUserPosts } from "./getUserPosts";
 
 // Action pour initier l'ajout d'un post
 const addPostRequest = () => {
@@ -30,7 +31,7 @@ export const addPost = (postData) => {
       .then((result) => {
         dispatch(addPostSuccess(result));
         dispatch(fetchPosts());
-        console.log(result);
+        dispatch(fetchUserPosts())
       })
       .catch((err) => {
         console.log(err);
