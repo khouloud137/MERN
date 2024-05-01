@@ -4,24 +4,25 @@
 }
 .bg-background {
   width: 100%;
-
   border-radius: 0 0 40px 40px;
 }
-
+.bg-hero {
+  margin-top: -15vh;
+}
 .bg-hero h1 {
   color: rgb(255, 255, 255);
-  font-size: 8rem;
+  font-size: 4rem;
   position: absolute;
-  top: 130px;
+  top: 60%;
   font-weight: 500;
   filter: drop-shadow(0 0 10px black);
   z-index: 1;
   /* text-align: center; */
   width: 100%;
   box-sizing: border-box;
-  padding: 0 10%;
+  padding: 0 20%;
 }
-.Typewriter{
+.Typewriter {
   z-index: 1;
 }
 .main-container h2 {
@@ -60,15 +61,54 @@
   margin: 50px auto;
 }
 .filter {
-  border: 1px solid rgb(0, 0, 0);
-
-  padding: 8px 180px 8px 0;
-
-  /* margin: auto; */
+  background-color: rgba(245, 222, 179, 0.212);
+  border-radius: 50px;
+  height: 200px;
+  padding: 8px 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+  box-shadow: inset 0 0 30px -20px gray;
 }
-
+.homeFilterInputs {
+  width: 60%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10%;
+}
 .input-filter {
-  margin: auto;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 30px 40px;
+  border-radius: 40px;
+  background-color: #100e0e;
+  color: white;
+  outline: none;
+  font-size: large;
+  border: 3px white solid;
+  transition: all 0.3s;
+}
+.input-filter:focus {
+  padding: 30px 50px;
+  border: 3px #f5ff78 solid;
+}
+#homeFilterBtn {
+  padding: 30px 40px;
+  font-size: large;
+  border: none;
+  background-color: #f5ff78;
+  color: black;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#homeFilterBtn svg {
+  color: rgba(0, 0, 0, 0.534);
+}
+#homeFilterBtn:hover {
+  background-color: rgb(63, 63, 63);
+  color: white;
+}
+#homeFilterBtn:hover #goFilterIcon {
+  color: white;
 }

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //  import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Login.css";
 import {
   UserLoginErrors,
   UserLoginRequest,
   UserLoginSuccess,
+  unsetEmail,
 } from "../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../../utility/apiClient";
@@ -14,8 +15,17 @@ import apiClient from "../../utility/apiClient";
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const authState = useSelector((state) => state.authReducer);
-  // const navigate = useNavigate();
+  const userSentEmail = useSelector((state) => state.users.tempEmail);
+
+  useEffect(() => {
+    if (userSentEmail) {
+      document.querySelector("#loginEmailInput").value = userSentEmail;
+    }
+    return () => {
+      dispatch(unsetEmail());
+    };
+  }, [dispatch, userSentEmail]);
+
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
@@ -79,6 +89,7 @@ function Login() {
         <div className="form-group">
           <label>Email</label>
           <input
+            id="loginEmailInput"
             className="input"
             type="email"
             placeholder="type your email..."

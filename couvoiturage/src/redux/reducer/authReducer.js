@@ -2,6 +2,7 @@ const initialeState = {
   user: {},
   errors: null,
   loading: false,
+  tempEmail: "",
 };
 const authReducer = (state = initialeState, action) => {
   switch (action.type) {
@@ -22,6 +23,16 @@ const authReducer = (state = initialeState, action) => {
         ...state,
         loading: false,
         user: action.payload.data.user,
+      };
+    case "SET_LOGIN_EMAIL":
+      return {
+        ...state,
+        tempEmail: action.payload,
+      };
+    case "UNSET_LOGIN_EMAIL":
+      return {
+        ...state,
+        tempEmail: "",
       };
     default:
       return state;

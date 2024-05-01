@@ -20,8 +20,31 @@ function Main() {
         </h5>
       </div>
       <div className="filter">
-        <input type="text" placeholder="Adresse de depart" className="input-filter" />
-        <input type="text" placeholder="arrivé" className="input-filter" />
+        <div className="homeFilterInputs">
+          <input
+            type="text"
+            placeholder="Adresse de depart"
+            className="input-filter"
+          />
+          <input type="text" placeholder="arrivé" className="input-filter" />
+        </div>
+        <button type="button" id="homeFilterBtn">
+          Trouve-moi un trajet &nbsp;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1rem"
+            height="1rem"
+            viewBox="0 0 15 15"
+            id="goFilterIcon"
+          >
+            <path
+              fill="currentColor"
+              fillRule="evenodd"
+              d="M2.146 11.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 1 0-.708.708L5.793 7.5zm6 0a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 1 0-.708.708L11.793 7.5z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </button>
       </div>
     </div>
   );

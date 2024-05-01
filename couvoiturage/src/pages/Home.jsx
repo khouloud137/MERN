@@ -5,6 +5,7 @@ import Main from "../component/Main";
 import Cards from "../component/Cards";
 import Navbar from "../component/Navbar";
 import ModelCard from "../component/Modalcard/ModelCard";
+import Footer from "../component/Footer";
 
 function Home() {
   return (
@@ -13,7 +14,8 @@ function Home() {
       <Hero />
       <Main />
       <Cards />
-      <ModelCard/>
+      <ModelCard />
+      <Footer />
     </div>
   );
 }

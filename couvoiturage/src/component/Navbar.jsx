@@ -3,9 +3,14 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import ModalSearch from "./ModalSearch";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setEmail } from "../redux/actions";
 
 function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+  const dispatch = useDispatch();
+
   const user = JSON.parse(localStorage.getItem("user_data"));
   const toggleSearch = () => {
     setShowSearch(!showSearch);
@@ -19,37 +24,71 @@ function Navbar() {
   return (
     <>
       <div className="navbar-container">
-        <div className="logo">
-          <NavLink to="/">
-            <img src="./assets/LOGO.png" alt="" width={200} />
+        <NavLink to="/" id="Logo">
+          <img src="./assets/LOGO.png" alt="" />
+        </NavLink>
+
+        <div className="nav">
+          <NavLink to="/" className="nav__NAv">
+            Home
           </NavLink>
-        </div>
+          <NavLink to="/publications" className="nav__NAv">
+            Publications
+          </NavLink>
+          <NavLink to="/profile" className="nav__NAv">
+            Profile
+          </NavLink>
 
-        <div className=" link_nav">
-          <div className="nav">
-            <NavLink to="/" className="nav__NAv">
-              {" "}
-              Home
+          {user ? (
+            <NavLink
+              to="/logout"
+              className="nav__NAv"
+              id="logoutBtn"
+              onClick={handleLogout}
+            >
+              Logout
             </NavLink>
-            <NavLink to="/publications" className="nav__NAv">
-              Publications
-            </NavLink>
+          ) : (
+            <>
+              <input
+                type="text"
+                className="Homeinput"
+                name="email"
+                placeholder=" votre email"
+                onChange={(e) => setLoginEmail(e.target.value)}
+              />
+              <div className="AuthBtns">
+                <NavLink
+                  to="/login"
+                  className="nav__NAv_Auth"
+                  id="loginBtn"
+                  onClick={() => dispatch(setEmail(loginEmail))}
+                >
+                  <svg
+                    className="btn_icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M13.47 8.53a.75.75 0 0 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 1 1-1.06-1.06l2.72-2.72H6.5a.75.75 0 0 1 0-1.5h9.69z"
+                    />
+                  </svg>
+                  Login
+                </NavLink>
 
-            <NavLink to="/profile" className="nav__NAv">
-              Profile
-            </NavLink>
-            {user ? (
-              <NavLink to="/logout" className="nav__NAv" onClick={handleLogout}>
-                Logout
-              </NavLink>
-            ) : (
-              <NavLink to="/register" className="nav__NAv">
-                Register
-              </NavLink>
-            )}
-          </div>
-        </div>
-        <div className="search-btn">
+                <NavLink
+                  to="/register"
+                  className="nav__NAv_Auth"
+                  id="registerBtn"
+                >
+                  Register
+                </NavLink>
+              </div>
+            </>
+          )}
           <button className="btn-search" type="button" onClick={toggleSearch}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -66,32 +105,9 @@ function Navbar() {
             </svg>
           </button>
         </div>
-        <div className="form-input">
-          <input
-            type="text"
-            className="Homeinput"
-            name="email"
-            placeholder=" votre email"
-          />
-          <NavLink to="/login">
-            <button className="form-btn" type="button">
-              <svg
-                className="btn_icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M13.47 8.53a.75.75 0 0 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 1 1-1.06-1.06l2.72-2.72H6.5a.75.75 0 0 1 0-1.5h9.69z"
-                />
-              </svg>
-            </button>
-          </NavLink>
 
-          {showSearch && <ModalSearch toggleSearch={toggleSearch} />}
-        </div>
+        <div className="form-input"></div>
+        {showSearch && <ModalSearch toggleSearch={toggleSearch} />}
       </div>
     </>
   );

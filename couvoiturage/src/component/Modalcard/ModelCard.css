@@ -4,6 +4,13 @@
   grid-template-columns: repeat(16, minmax(0px, 1fr));
   column-gap: var(--grid-gap);
   padding: 70px;
+  gap: 10px;
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+.crt_wrapper img {
+  height: 550px;
+  object-fit: cover;
 }
 .crt_lefet {
   grid-column: 1/9;
@@ -86,6 +93,7 @@
 }
 .crt_right {
   grid-column: 9/-1;
+  /* transform: translateY(250px); */
 }
 .card_one_right {
   translate: none;
@@ -96,7 +104,6 @@
   border-radius: 15px;
   margin-bottom: 17px;
   overflow: hidden;
-  transform: translateY(50px);
 }
 .card_one_right .card_content {
   background: #9a82f5;
@@ -118,7 +125,7 @@
   margin-bottom: 17px;
   overflow: hidden;
   transform: translateY(50px);
-  padding-top: 290px;
+  /* padding-top: 290px; */
 }
 .card_two_right .card_content {
   background: #f5ff78;
@@ -126,14 +133,13 @@
   position: relative;
   padding: 50px 40px;
   z-index: 5;
-  margin:0 20px ;
-  margin-bottom: -30px;
+
   padding: 30px 20px;
-  border-radius: 15px;
+  border-radius: 0 0 15px 15px;
 }
 
 .card_two_right .card_content .card_bg {
-  position: absolute; 
+  position: absolute;
   z-index: 1;
   top: 0;
   left: 0;
@@ -156,4 +162,12 @@
 .card_three_right .card_content {
   background: #f5ff78;
   color: #100e0e;
+}
+.crt_right img {
+  margin-bottom: -30px;
+}
+
+.card-four-lefet img {
+  height: 290px;
+  width: 100%;
 }

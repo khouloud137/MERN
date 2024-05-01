@@ -15,7 +15,17 @@ export const UserLoginSuccess = (payload) => {
     payload,
   };
 };
-
+export const setEmail = (payload) => {
+  return {
+    type: "SET_LOGIN_EMAIL",
+    payload,
+  };
+};
+export const unsetEmail = () => {
+  return {
+    type: "UNSET_LOGIN_EMAIL",
+  };
+};
 // export const UserLogin = (payload) => {
 //   return (dispatch) => {
 //     dispatch(UserLoginRequest());
