@@ -67,3 +67,20 @@
 .new_post_buttons #CancelBtn:hover {
   background-color: #312a2ae3;
 }
+.svg-icones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-icons {
+  border-radius: 39px;
+  border: unset;
+  background-color: transparent;
+  filter: drop-shadow(0 0 12px black);
+  cursor: pointer;
+}
+.toggleIcons {
+  color: red;
+}

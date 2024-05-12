@@ -2,12 +2,13 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
-    description: String,
+    options:[String],
     adressePart: String,
     adresseArrive: String,
     prix: String,
     numplace: String,
     date: String,
+    time:String,
     phone: String,
 
     creator: {
