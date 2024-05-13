@@ -44,9 +44,8 @@ function Posts({ search }) {
           post.adresseArrive
             .toLowerCase()
             .includes(search.adresseArrive.toLowerCase()) &&
-          post.prix.toLowerCase().includes(search.prix.toLowerCase()) && // &&
-          // post.numplace === search.numplace
-           post.date === search.date &&
+          post.prix.toLowerCase().includes(search.prix.toLowerCase()) &&
+          post.date === search.date &&
           post.time === search.time
         );
       }
@@ -57,13 +56,18 @@ function Posts({ search }) {
         post.adresseArrive
           .toLowerCase()
           .includes(search.adresseArrive.toLowerCase()) &&
-        post.prix.toLowerCase().includes(search.prix.toLowerCase()) //&&
-        // post.numplace === search.numplace
+        post.prix.toLowerCase().includes(search.prix.toLowerCase())
       );
     })
     .filter((post) => {
       if (search.options.length > 0) {
         return search.options.every((option) => post.options.includes(option));
+      }
+      return true;
+    })
+    .filter((post) => {
+      if (search.numplace > 0) {
+        return post.numplace === search.numplace;
       }
       return true;
     });
@@ -74,7 +78,6 @@ function Posts({ search }) {
         <NewPost />
         {filteredValue &&
           filteredValue.toReversed().map((post, index) => {
-            console.log(filteredValue);
             return (
               <Post
                 key={index}

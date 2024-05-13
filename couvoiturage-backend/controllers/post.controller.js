@@ -48,7 +48,7 @@ exports.UpdatePost = async (req, res) => {
       { updatepost },
       { new: true }
     );
-    console.log(updatepost);
+
     if (post) {
       res.json({ status: "success", message: "post updated" });
     } else {
@@ -86,7 +86,7 @@ exports.putPost = async (req, res) => {
     }
 
     PUTPOST.appliedUsers.push(params.userID);
-    PUTPOST.numplace = numplace - 1;
+    PUTPOST.numplace = PUTPOST.numplace - 1;
     await PUTPOST.save();
 
     res.json({ status: "success", data: PUTPOST });

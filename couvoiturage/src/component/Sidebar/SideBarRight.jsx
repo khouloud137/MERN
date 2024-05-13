@@ -16,7 +16,7 @@ function SideBarRight({ setsearchvalue, search }) {
             adressePart: "",
             adresseArrive: "",
             prix: "",
-            numplace: "",
+            numplace: 0,
             date: "",
             time: "",
             phone: "",

@@ -10,7 +10,7 @@ function Publications() {
     adressePart: "",
     adresseArrive: "",
     prix: "",
-    numplace: "",
+    numplace: 0,
     date: "",
     time: "",
     phone: "",

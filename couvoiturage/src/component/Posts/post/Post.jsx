@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./Post.css";
 import DeletePostConfirm from "../DeletePost/DeletePostConfirm";
-import apiClient from "../../../utility/apiClient";
+import { useDispatch } from "react-redux";
+import { applyPost } from "../../../redux/actions/getALLpostAction";
 
 function Post({
   adressePart,
@@ -30,16 +31,12 @@ function Post({
   const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
   const pathname = useLocation().pathname;
   const userID = JSON.parse(localStorage.getItem("user_data")).id;
+  const dispatch = useDispatch();
+
   const handelApply = (postId, userID) => {
-    apiClient
-      .put(`posts/PUTPOST/${postId}/${userID}`)
-      .then((response) => {
-        console.log("Post updated successfully:", response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(applyPost({ postId, userID }));
   };
+
   return (
     <>
       <div className="post">

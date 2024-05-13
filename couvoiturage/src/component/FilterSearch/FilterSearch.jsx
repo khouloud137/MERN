@@ -81,12 +81,12 @@ function FilterSearch({ setsearchvalue, search }) {
           className="addPostInput"
           type="number"
           placeholder="membres"
-          min={1}
+          min={0}
           max={4}
           onChange={(e) => {
             setsearchvalue({
               ...search,
-              numplace: e.target.value,
+              numplace: Number(e.target.value),
               globalSearch: "",
             });
           }}
