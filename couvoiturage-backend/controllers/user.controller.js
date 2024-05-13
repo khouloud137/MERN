@@ -6,7 +6,6 @@ exports.signup = async (req, res) => {
   const data = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 10),
     bio: req.body.bio,

@@ -13,15 +13,15 @@ function Profile() {
     dispatch(fetchUserPosts());
   }, [dispatch]);
   const postsData = useSelector((state) => state.getuserposts.userposts);
-  console.log(postsData);
+
   return (
     <div className="profile-container">
       <div className="layout_app_profile">
         <div className="leftBox" style={{ width: "25%" }}>
           <SideBar />
         </div>
-        <div style={{ width: "50%" }}>
-          <UserNameProfile />
+        <div style={{ width: "50%", padding: "20px" }}>
+          <UserNameProfile postsData={postsData} />
           <div className="posts">
             <NewPost />
             {postsData &&
@@ -31,14 +31,17 @@ function Profile() {
                     key={index}
                     phone={post.phone}
                     prix={post.prix}
-                    description={post.description}
+                    options={post.options}
                     adressePart={post.adressePart}
                     adresseArrive={post.adresseArrive}
                     date={post.date}
+                    time={post.time}
                     numplace={post.numplace}
                     firstname={post.creator.firstname}
                     lastname={post.creator.lastname}
                     createdAt={post.createdAt}
+                    profilePicture={post.creator.profilePicture}
+                    creatorId={post.creator._id}
                   />
                 );
               })}

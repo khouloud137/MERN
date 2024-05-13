@@ -14,8 +14,7 @@ const uerSchema = new mongoose.Schema({
     enum: ["admin", "user"],
     default: "user",
   },
-
-  picture: String,
+  bio: String,
   birthdate: Date,
 });
 module.exports = mongoose.model("users", uerSchema);

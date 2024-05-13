@@ -14,7 +14,7 @@ function Publications() {
     date: "",
     time: "",
     phone: "",
-    description: "",
+    options: [],
     globalSearch: "",
   });
 

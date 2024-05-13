@@ -46,11 +46,10 @@ function Posts({ search }) {
             .includes(search.adresseArrive.toLowerCase()) &&
           post.prix.toLowerCase().includes(search.prix.toLowerCase()) &&
           post.numplace.toLowerCase().includes(search.numplace.toLowerCase()) &&
-          post.date == search.date &&
-          post.time == search.time
+          post.date === search.date &&
+          post.time === search.time
         );
       }
-
       return (
         post.adressePart
           .toLowerCase()
@@ -61,6 +60,12 @@ function Posts({ search }) {
         post.prix.toLowerCase().includes(search.prix.toLowerCase()) &&
         post.numplace.toLowerCase().includes(search.numplace.toLowerCase())
       );
+    })
+    .filter((post) => {
+      if (search.options.length > 0) {
+        return search.options.every((option) => post.options.includes(option));
+      }
+      return true;
     });
 
   return (
@@ -83,6 +88,8 @@ function Posts({ search }) {
                 firstname={post.creator.firstname}
                 lastname={post.creator.lastname}
                 createdAt={post.createdAt}
+                profilePicture={post.creator.profilePicture}
+                creatorId={post.creator._id}
               />
             );
           })}

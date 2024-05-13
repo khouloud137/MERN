@@ -31,7 +31,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.09;
+  opacity: 0.05;
   position: absolute;
   top: 0;
   left: 0;
@@ -68,8 +68,8 @@
   margin: 0;
   padding: 10px 0;
 }
-.user_name h5 {
-  font-size: 13px;
+.user_name h4 {
+  font-size: 17px;
   margin: 0;
   padding: 0;
 }
@@ -80,12 +80,12 @@
 }
 .startingDate {
   position: absolute;
-  top: 2%;
+  top: 5%;
   right: 2%;
 }
 .availablePlaces {
   position: absolute;
-  top: 30%;
+  top: 37%;
   right: 2%;
 }
 .Price {
@@ -97,10 +97,54 @@
 .post_content_details span {
   padding: 10px;
   margin: 5px 0;
-  background-color: #a4a7a954;
+  background-color: #a4a7a93a;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
 }
-.svgicones{
+
+.svgicones {
   border: 3px solid black;
-  
+}
+.btn-iconsPost {
+  border-radius: 39px;
+  border: unset;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.336);
+  filter: drop-shadow(0 0 12px #0da100);
+  cursor: auto;
+  width: 35px;
+  height: 35px;
+  margin: 0 2px;
+}
+.toggleBtn {
+  color: #0da100;
+  border: 1px #0da100 solid;
+}
+.PostConfigBtns {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.ApplyBtn {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  height: 45px;
+  width: 70px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 0 20px -5px gray;
+}
+.ApplyBtn:hover {
+  background-color: #f5ff78;
+  color: black;
+}
+.DeleteBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 1%;
 }

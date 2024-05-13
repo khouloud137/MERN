@@ -1,6 +1,7 @@
 .FilterSearch {
   width: 80%;
-  margin: 35px 0;
+
+  /* margin: 35px 0 0 0; */
 }
 .FilterSearch label {
   display: block;

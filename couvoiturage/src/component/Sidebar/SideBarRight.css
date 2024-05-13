@@ -5,7 +5,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 80%;
-  min-height: 90vh;
+  min-height: 10vh;
   overflow: hidden;
   border-radius: 10px;
   padding: 15px 0;
@@ -34,4 +34,17 @@
 .PublicationsInput:focus {
   background: #312a2aa2;
   box-shadow: inset 0 0 10px -5px rgb(0, 0, 0);
+}
+#showAdSearchBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.adSearchSecondLayer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: hidden;
 }

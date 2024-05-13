@@ -1,0 +1,41 @@
+.DeletePostConfirmWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.377);
+  z-index: 10;
+}
+.DeletePostConfirm {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  padding: 10px;
+  border-radius: 30px;
+}
+.DeletePostConfirmBtns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.DeletePostConfirmBtns button {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  height: 45px;
+  width: 70px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 0 25px -5px rgb(58, 58, 58);
+}
+.DeletePostConfirmBtns button:hover {
+  background-color: #f5ff78;
+  color: black;
+}

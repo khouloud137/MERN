@@ -78,9 +78,12 @@
   border-radius: 39px;
   border: unset;
   background-color: transparent;
-  filter: drop-shadow(0 0 12px black);
+  filter: drop-shadow(0 0 12px #0da100);
   cursor: pointer;
 }
+.btn-icons svg {
+  pointer-events: none;
+}
 .toggleIcons {
-  color: red;
+  color: #0da100;
 }

@@ -15,11 +15,11 @@ function AddPosts({ togglePost }) {
     prix: "",
     phone: "",
     creator: "",
-    options: "",
+    options: [],
   });
-  console.log(post);
+
   // const userID = useSelector((state) => state.users.user);
- const [selectedButton, setSelectedButton] = useState(null);
+
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,19 +33,24 @@ function AddPosts({ togglePost }) {
       numplace: "",
       prix: "",
       phone: "",
-      options: "",
+      options: [],
       creator: "",
     });
     togglePost();
   };
+
   const handleicons = (e) => {
+    const value = e.currentTarget.getAttribute("data-value");
+
     if (e.target.classList.contains("toggleIcons")) {
       e.target.classList.remove("toggleIcons");
+      const removedData = post.options.filter((item) => item.includes(value));
+      setPost({ ...post, options: removedData });
     } else {
       e.target.classList.add("toggleIcons");
+
+      setPost({ ...post, options: [...post.options, value] });
     }
-    const value = e.currentTarget.getAttribute("data-value");
-    setPost({ ...post, options: value });
   };
 
   return (
@@ -124,6 +129,7 @@ function AddPosts({ togglePost }) {
               width="1.9em"
               height="1.9em"
               viewBox="0 0 256 256"
+              
             >
               <path
                 fill="currentColor"

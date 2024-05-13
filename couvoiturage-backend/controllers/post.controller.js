@@ -2,7 +2,10 @@ const POST = require("../models/posts.model");
 
 exports.GetAllposts = async (req, res) => {
   try {
-    const post = await POST.find().populate("creator", "firstname lastname id");
+    const post = await POST.find().populate(
+      "creator",
+      "firstname lastname id profilePicture"
+    );
     res.json({ status: "success", data: post });
   } catch (err) {
     res.status(500).json({ status: "error", message: "error" });
@@ -10,7 +13,6 @@ exports.GetAllposts = async (req, res) => {
 };
 
 exports.AddPost = async (req, res) => {
-  
   const postData = { ...req.body, creator: req.user.data.id };
   try {
     const post = await POST.create(postData);
@@ -56,12 +58,15 @@ exports.UpdatePost = async (req, res) => {
     res.status(500).json({ status: "error", message: "error" });
   }
 };
-exports.GetUserposts = async(req,res)=>{
+exports.GetUserposts = async (req, res) => {
   const userID = req.user.data.id;
   try {
-    const post = await POST.find({creator:userID}).populate("creator", "firstname lastname id");
+    const post = await POST.find({ creator: userID }).populate(
+      "creator",
+      "firstname lastname id profilePicture"
+    );
     res.json({ status: "success", data: post });
   } catch (err) {
     res.status(500).json({ status: "error", message: "error" });
   }
-}
+};

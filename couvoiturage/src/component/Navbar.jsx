@@ -5,6 +5,7 @@ import ModalSearch from "./ModalSearch";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setEmail } from "../redux/actions";
+import handleLogout from "../utility/logoutHandler";
 
 function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
@@ -16,10 +17,6 @@ function Navbar() {
     setShowSearch(!showSearch);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("user_data");
-    localStorage.removeItem("token");
-  };
 
   return (
     <>
