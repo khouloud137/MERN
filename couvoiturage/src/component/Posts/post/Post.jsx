@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./Post.css";
 import DeletePostConfirm from "../DeletePost/DeletePostConfirm";
+import apiClient from "../../../utility/apiClient";
 
 function Post({
   adressePart,
@@ -17,6 +18,7 @@ function Post({
   createdAt,
   profilePicture,
   creatorId,
+  postId,
 }) {
   const [showDltPost, setShowDltPost] = useState(false);
   const originalDate = new Date(createdAt);
@@ -28,7 +30,16 @@ function Post({
   const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
   const pathname = useLocation().pathname;
   const userID = JSON.parse(localStorage.getItem("user_data")).id;
-
+  const handelApply = (postId, userID) => {
+    apiClient
+      .put(`posts/PUTPOST/${postId}/${userID}`)
+      .then((response) => {
+        console.log("Post updated successfully:", response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="post">
@@ -44,7 +55,11 @@ function Post({
           </div>
           <div className="PostConfigBtns">
             {pathname !== "/profile" && creatorId !== userID && (
-              <button type="button" className="ApplyBtn">
+              <button
+                type="button"
+                className="ApplyBtn"
+                onClick={() => handelApply(postId, userID)}
+              >
                 Apply
               </button>
             )}
@@ -141,7 +156,7 @@ function Post({
                 d="M16.67 13.13C18.04 14.06 19 15.32 19 17v3h4v-3c0-2.18-3.57-3.47-6.33-3.87M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4c-.47 0-.91.1-1.33.24a5.98 5.98 0 0 1 0 7.52c.42.14.86.24 1.33.24m-6 0c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4m0-6c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2m0 7c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4m6 5H3v-.99C3.2 16.29 6.3 15 9 15s5.8 1.29 6 2z"
               ></path>
             </svg>
-            <b>{numplace}</b>
+            <b>{numplace} </b>
           </span>
           <span className="Price">
             <svg
@@ -267,10 +282,12 @@ function Post({
             </button>
           </span>
         </div>
+
         {showDltPost && (
           <DeletePostConfirm
             showDltPost={showDltPost}
             setShowDltPost={setShowDltPost}
+            postId={postId}
           />
         )}
       </div>

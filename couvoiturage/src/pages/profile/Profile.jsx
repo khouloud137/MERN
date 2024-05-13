@@ -42,6 +42,7 @@ function Profile() {
                     createdAt={post.createdAt}
                     profilePicture={post.creator.profilePicture}
                     creatorId={post.creator._id}
+                    postId={post._id}
                   />
                 );
               })}

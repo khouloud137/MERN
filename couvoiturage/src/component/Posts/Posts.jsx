@@ -44,9 +44,9 @@ function Posts({ search }) {
           post.adresseArrive
             .toLowerCase()
             .includes(search.adresseArrive.toLowerCase()) &&
-          post.prix.toLowerCase().includes(search.prix.toLowerCase()) &&
-          post.numplace.toLowerCase().includes(search.numplace.toLowerCase()) &&
-          post.date === search.date &&
+          post.prix.toLowerCase().includes(search.prix.toLowerCase()) && // &&
+          // post.numplace === search.numplace
+           post.date === search.date &&
           post.time === search.time
         );
       }
@@ -57,8 +57,8 @@ function Posts({ search }) {
         post.adresseArrive
           .toLowerCase()
           .includes(search.adresseArrive.toLowerCase()) &&
-        post.prix.toLowerCase().includes(search.prix.toLowerCase()) &&
-        post.numplace.toLowerCase().includes(search.numplace.toLowerCase())
+        post.prix.toLowerCase().includes(search.prix.toLowerCase()) //&&
+        // post.numplace === search.numplace
       );
     })
     .filter((post) => {
@@ -74,6 +74,7 @@ function Posts({ search }) {
         <NewPost />
         {filteredValue &&
           filteredValue.toReversed().map((post, index) => {
+            console.log(filteredValue);
             return (
               <Post
                 key={index}
@@ -90,6 +91,7 @@ function Posts({ search }) {
                 createdAt={post.createdAt}
                 profilePicture={post.creator.profilePicture}
                 creatorId={post.creator._id}
+                postId={post._id}
               />
             );
           })}
