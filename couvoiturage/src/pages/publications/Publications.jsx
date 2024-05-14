@@ -5,7 +5,7 @@ import StoryList from "../../component/Stories/StoryList";
 import Posts from "../../component/Posts/Posts";
 import SideBarRight from "../../component/Sidebar/SideBarRight";
 
-function Publications() {
+function Publications({ showSettings, setShowSettings }) {
   const [search, setsearchvalue] = useState({
     adressePart: "",
     adresseArrive: "",
@@ -23,7 +23,10 @@ function Publications() {
       <div className="layout_app">
         <div className="leftBox" style={{ width: "25%" }}>
           {/* lefet  box*/}
-          <SideBar />
+          <SideBar
+            showSettings={showSettings}
+            setShowSettings={setShowSettings}
+          />
         </div>
         <div className="middelBox" style={{ width: "50%" }}>
           {/* Middel Box */}
@@ -35,8 +38,6 @@ function Publications() {
           <SideBarRight setsearchvalue={setsearchvalue} search={search} />
         </div>
       </div>
-
-      {/*  */}
     </div>
   );
 }

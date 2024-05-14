@@ -7,8 +7,10 @@ import "../../pages/profile/Profile.css";
 import UserNameProfile from "../../component/userNameProfile/UserNameProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPosts } from "../../redux/actions/getUserPosts";
-function Profile() {
+
+function Profile({ showSettings, setShowSettings }) {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchUserPosts());
   }, [dispatch]);
@@ -18,7 +20,10 @@ function Profile() {
     <div className="profile-container">
       <div className="layout_app_profile">
         <div className="leftBox" style={{ width: "25%" }}>
-          <SideBar />
+          <SideBar
+            showSettings={showSettings}
+            setShowSettings={setShowSettings}
+          />
         </div>
         <div style={{ width: "50%", padding: "20px" }}>
           <UserNameProfile postsData={postsData} />

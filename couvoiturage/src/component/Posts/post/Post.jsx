@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./Post.css";
 import DeletePostConfirm from "../DeletePost/DeletePostConfirm";
 import { useDispatch } from "react-redux";
-import { applyPost } from "../../../redux/actions/getALLpostAction";
+import { applyPost, cancelPost } from "../../../redux/actions/getALLpostAction";
 
 function Post({
   adressePart,
@@ -20,6 +20,7 @@ function Post({
   profilePicture,
   creatorId,
   postId,
+  appliedUsers,
 }) {
   const [showDltPost, setShowDltPost] = useState(false);
   const originalDate = new Date(createdAt);
@@ -34,7 +35,13 @@ function Post({
   const dispatch = useDispatch();
 
   const handelApply = (postId, userID) => {
-    dispatch(applyPost({ postId, userID }));
+    if (numplace > 0) {
+      dispatch(applyPost({ postId, userID }));
+    }
+  };
+
+  const handelCancel = (postId, userID) => {
+    dispatch(cancelPost({ postId, userID }));
   };
 
   return (
@@ -51,15 +58,41 @@ function Post({
             <span>{formattedDate}</span>
           </div>
           <div className="PostConfigBtns">
-            {pathname !== "/profile" && creatorId !== userID && (
-              <button
-                type="button"
-                className="ApplyBtn"
-                onClick={() => handelApply(postId, userID)}
-              >
-                Apply
-              </button>
-            )}
+            <div
+              className="postStatus"
+              style={{ backgroundColor: numplace === 0 ? "red" : "blue" }}
+            >
+              {numplace === 0 ? "Closed" : "Open"}
+            </div>
+
+            {pathname !== "/profile" &&
+              creatorId !== userID &&
+              (appliedUsers.includes(userID) ? (
+                <button
+                  type="button"
+                  className="CancelBtn"
+                  onClick={() => handelCancel(postId, userID)}
+                >
+                  Cancel
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="ApplyBtn"
+                  style={
+                    numplace === 0
+                      ? {
+                          cursor: "auto",
+                          backgroundColor: "grey",
+                          color: "white",
+                        }
+                      : null
+                  }
+                  onClick={() => handelApply(postId, userID)}
+                >
+                  Apply
+                </button>
+              ))}
             {creatorId === userID && (
               <button
                 type="button"

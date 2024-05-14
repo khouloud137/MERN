@@ -142,9 +142,35 @@
   background-color: #f5ff78;
   color: black;
 }
+.CancelBtn {
+  background-color: #312a2a;
+  color: white;
+  cursor: pointer;
+  height: 45px;
+  width: 70px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 0 20px -5px gray;
+}
+.CancelBtn:hover {
+  background-color: #312a2ae3;
+  color: white;
+}
 .DeleteBtn {
   background-color: transparent;
   border: none;
   cursor: pointer;
   margin-left: 1%;
+}
+.postStatus {
+  color: white;
+  height: 45px;
+  width: 70px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 0 20px -5px gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
 }

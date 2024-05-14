@@ -43,3 +43,17 @@ export const applyPost = (applyData) => {
       });
   };
 };
+
+export const cancelPost = (applyData) => {
+  return (dispatch) => {
+    return apiClient
+      .put(`posts/cancelPut/${applyData.postId}/${applyData.userID}`)
+      .then((response) => {
+        console.log("Post updated successfully:", response);
+        dispatch(fetchPosts());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};

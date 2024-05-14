@@ -1,0 +1,88 @@
+.SettingsWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.377);
+  z-index: 10;
+}
+
+.Settings,
+.Settings form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Settings {
+  width: 550px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  padding: 15px;
+}
+.Settings form {
+  width: 100%;
+  gap: 10px;
+}
+.Settings form h1 {
+  margin: 10px 0;
+}
+.Settings form input {
+  padding: 20px;
+  width: 90%;
+  background: #100e0e;
+  height: 50px;
+  border-radius: 100px;
+  color: #fff;
+  line-height: 1.15;
+  border: 1px solid white;
+  outline: none;
+  transition: all 0.3s;
+}
+.Settings form input:focus {
+  background: #312a2a;
+}
+#profilePicture {
+  height: fit-content;
+  width: fit-content;
+}
+.Settings form textarea {
+  resize: none;
+  width: 90%;
+  height: 100px;
+  outline: none;
+  background: #100e0e;
+  border-radius: 30px;
+  padding: 20px;
+  color: white;
+  transition: all 0.3s;
+}
+.Settings form textarea:focus {
+  background: #312a2a;
+}
+.SettingsBtns {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.SettingsBtns button {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  height: 45px;
+  min-width: 70px;
+  padding: 0 10px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 0 25px -5px rgb(58, 58, 58);
+}
+.SettingsBtns button:hover {
+  background-color: #f5ff78;
+  color: black;
+}

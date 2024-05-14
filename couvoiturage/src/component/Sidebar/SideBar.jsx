@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import UsernameCard from "../UsernameCard/Usernamecard";
 import handleLogout from "../../utility/logoutHandler";
 
-function SideBar() {
+function SideBar({ showSettings, setShowSettings }) {
   return (
     <>
       <div className="sidebar">
@@ -25,40 +25,6 @@ function SideBar() {
               />
             </svg>
             <b>Home</b>
-          </Link>
-          <hr />
-          <Link to="/" className="sideBarLinks">
-            <svg
-              className="me-3"
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill="currentColor"
-                d="M10 9a3 3 0 1 0 0-6a3 3 0 0 0 0 6M6 8a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-4.51 7.326a.78.78 0 0 1-.358-.442a3 3 0 0 1 4.308-3.516a6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655m14.95.654a4.97 4.97 0 0 0 2.07-.654a.78.78 0 0 0 .357-.442a3 3 0 0 0-4.308-3.517a6.484 6.484 0 0 1 1.907 3.96a2.32 2.32 0 0 1-.026.654M18 8a2 2 0 1 1-4 0a2 2 0 0 1 4 0M5.304 16.19a.844.844 0 0 1-.277-.71a5 5 0 0 1 9.947 0a.843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81"
-              />
-            </svg>
-            <b>people</b>
-          </Link>
-          <hr />
-          <Link to="/" className="sideBarLinks">
-            <svg
-              className="me-3"
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill="currentColor"
-                fillRule="evenodd"
-                d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.69l-2.22-2.219a.75.75 0 0 0-1.06 0l-1.91 1.909l.47.47a.75.75 0 1 1-1.06 1.06L6.53 8.091a.75.75 0 0 0-1.06 0zM12 7a1 1 0 1 1-2 0a1 1 0 0 1 2 0"
-                clipRule="evenodd"
-              />
-            </svg>
-            <b>photos</b>
           </Link>
           <hr />
           <Link to="/publications" className="sideBarLinks">
@@ -99,7 +65,11 @@ function SideBar() {
             <b>Profile</b>
           </Link>
           <hr />
-          <Link to="/setting" className="sideBarLinks">
+          <Link
+            to="#"
+            className="sideBarLinks"
+            onClick={() => setShowSettings(!showSettings)}
+          >
             <svg
               className="me-3"
               xmlns="http://www.w3.org/2000/svg"

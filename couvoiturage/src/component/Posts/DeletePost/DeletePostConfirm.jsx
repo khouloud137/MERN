@@ -8,27 +8,26 @@ import { fetchUserPosts } from "../../../redux/actions/getUserPosts";
 import { fetchPosts } from "../../../redux/actions/getALLpostAction";
 
 function DeletePostConfirm({ setShowDltPost, showDltPost, postId }) {
-  const dispatch= useDispatch()
-  const pathname = useLocation().pathname
+  const dispatch = useDispatch();
+  const pathname = useLocation().pathname;
   const handelDltPost = (postId) => {
     apiClient
       .delete(`posts/DeletePost/${postId}`)
       .then((response) => {
-        console.log("Post deleted successfully:", response)
-if(pathname === '/profile'){
-   dispatch(fetchUserPosts());
-}else if(pathname ==='/publications'){
-  dispatch(fetchPosts());
-}
+        console.log("Post deleted successfully:", response);
+        if (pathname === "/profile") {
+          dispatch(fetchUserPosts());
+        } else if (pathname === "/publications") {
+          dispatch(fetchPosts());
+        }
         setShowDltPost(!showDltPost);
-
       })
       .catch((err) => console.log(err));
   };
   return (
     <div className="DeletePostConfirmWrapper">
       <div className="DeletePostConfirm">
-        <p>Es-tu sur de vouloir supprimer cette annonce?</p>
+        <p>Êtes-vous sûr d'avoir supprimé cette annonce?</p>
         <div className="DeletePostConfirmBtns">
           <button type="button" onClick={() => handelDltPost(postId)}>
             Valider

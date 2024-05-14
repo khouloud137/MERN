@@ -95,6 +95,7 @@ function Posts({ search }) {
                 profilePicture={post.creator.profilePicture}
                 creatorId={post.creator._id}
                 postId={post._id}
+                appliedUsers={post.appliedUsers}
               />
             );
           })}

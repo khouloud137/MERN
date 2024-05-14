@@ -1,4 +1,6 @@
 const POST = require("../models/posts.model");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 exports.GetAllposts = async (req, res) => {
   try {
@@ -70,6 +72,7 @@ exports.GetUserposts = async (req, res) => {
     res.status(500).json({ status: "error", message: "error" });
   }
 };
+
 exports.putPost = async (req, res) => {
   const params = req.params;
 
@@ -87,6 +90,35 @@ exports.putPost = async (req, res) => {
 
     PUTPOST.appliedUsers.push(params.userID);
     PUTPOST.numplace = PUTPOST.numplace - 1;
+    await PUTPOST.save();
+
+    res.json({ status: "success", data: PUTPOST });
+  } catch (err) {
+    res.status(500).json({ status: "error", message: "error" });
+  }
+};
+
+exports.cancelPost = async (req, res) => {
+  const params = req.params;
+
+  try {
+    if (!params.id) {
+      res.status(400).json({ status: "error", message: "Invalid id" });
+      return;
+    }
+
+    const PUTPOST = await POST.findById(params.id);
+    if (!PUTPOST) {
+      res.status(404).json({ status: "error", message: "Post not found" });
+      return;
+    }
+
+    const newData = PUTPOST.appliedUsers.filter((item) => {
+      return !item.equals(new ObjectId(params.userID));
+    });
+
+    PUTPOST.appliedUsers = newData;
+    PUTPOST.numplace = PUTPOST.numplace + 1;
     await PUTPOST.save();
 
     res.json({ status: "success", data: PUTPOST });
