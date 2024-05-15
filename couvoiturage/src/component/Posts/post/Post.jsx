@@ -4,6 +4,7 @@ import "./Post.css";
 import DeletePostConfirm from "../DeletePost/DeletePostConfirm";
 import { useDispatch } from "react-redux";
 import { applyPost, cancelPost } from "../../../redux/actions/getALLpostAction";
+import FullSizePicture from "../FullSizePicture";
 
 function Post({
   adressePart,
@@ -21,8 +22,10 @@ function Post({
   creatorId,
   postId,
   appliedUsers,
+  postPicture,
 }) {
   const [showDltPost, setShowDltPost] = useState(false);
+  const [showFullSize, setShowFullSize] = useState(false);
   const originalDate = new Date(createdAt);
   const year = originalDate.getFullYear();
   const month = String(originalDate.getMonth() + 1).padStart(2, "0");
@@ -31,7 +34,8 @@ function Post({
   const minutes = String(originalDate.getMinutes()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
   const pathname = useLocation().pathname;
-  const userID = JSON.parse(localStorage.getItem("user_data")).id;
+  const user = JSON.parse(localStorage.getItem("user_data"));
+  const userID = user.id;
   const dispatch = useDispatch();
 
   const handelApply = (postId, userID) => {
@@ -49,12 +53,21 @@ function Post({
       <div className="post">
         <div className="post_user_details">
           <div className="user_image">
-            <img src={profilePicture} alt="Profile" />
+            <img
+              src={creatorId !== userID ? profilePicture : user.profilePicture}
+              alt="Profile"
+            />
           </div>
           <div className="user_name">
-            <h4>
-              {firstname} {lastname}
-            </h4>
+            {creatorId !== userID ? (
+              <h4>
+                {firstname} {lastname}
+              </h4>
+            ) : (
+              <h4>
+                {user.firstname} {user.lastname}
+              </h4>
+            )}
             <span>{formattedDate}</span>
           </div>
           <div className="PostConfigBtns">
@@ -114,7 +127,7 @@ function Post({
             )}
           </div>
         </div>
-        <div className="post_actions"></div>
+        <div className="post_content_detailsWrapper"></div>
         <div className="post_content_details">
           <span
             style={{
@@ -206,111 +219,121 @@ function Post({
             </svg>
             {prix} TND
           </span>
-          <span>
-            {/* <b>Phone n°</b> */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1.5rem"
-              height="1.5rem"
-              viewBox="0 0 24 24"
-              className="descrIcon"
+          <div className="detailsContainer">
+            <div
+              className="postPictureWrapper"
+              onClick={() => setShowFullSize(!showFullSize)}
             >
-              <path
-                fill="currentColor"
-                d="M19 17.47c-.88-.07-1.75-.22-2.6-.45l-1.19 1.19c1.2.41 2.48.67 3.8.75v-1.49zM5.03 5c.09 1.32.35 2.59.75 3.8l1.2-1.2c-.23-.84-.38-1.71-.44-2.6z"
-                opacity={0.3}
-              ></path>
-              <path
-                fill="currentColor"
-                d="M9.07 7.57A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1c0 9.39 7.61 17 17 17c.55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1c-1.24 0-2.45-.2-3.57-.57a.84.84 0 0 0-.31-.05c-.26 0-.51.1-.71.29l-2.2 2.2a15.149 15.149 0 0 1-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02m7.33 9.45c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75zM5.79 8.8c-.41-1.21-.67-2.48-.76-3.8h1.5a13 13 0 0 0 .46 2.59z"
-              ></path>
-            </svg>
-            <b>{phone}</b>
-          </span>
-          <span>
-            <button
-              type="button"
-              className={
-                options.includes("valeur-button1")
-                  ? "btn-iconsPost toggleBtn"
-                  : "btn-iconsPost"
-              }
-              data-value="valeur-button1"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.3rem"
-                height="1.3rem"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  fill="currentColor"
-                  d="M220.59 36.94a11.83 11.83 0 0 0-13.08 2.61l-.19.2l-19.55 22.49a107.1 107.1 0 0 0-119.54 0L48.68 39.75l-.19-.2A12 12 0 0 0 28 48v88c0 50.72 44.86 92 100 92s100-41.27 100-92V48a11.82 11.82 0 0 0-7.41-11.06M220 136c0 45.09-39.12 82-88 83.91v-26.25l14.83-14.83a4 4 0 1 0-5.66-5.65L128 186.35l-13.17-13.17a4 4 0 1 0-5.66 5.65L124 193.66v26.26C75.12 218 36 181.1 36 136V48a3.93 3.93 0 0 1 2.47-3.7a4.4 4.4 0 0 1 1.6-.31a3.77 3.77 0 0 1 2.67 1.1l21.84 25.14a4 4 0 0 0 5.4.59A94 94 0 0 1 92 58.74V88a4 4 0 0 0 8 0V56a100 100 0 0 1 24-3.93V88a4 4 0 0 0 8 0V52.09A100 100 0 0 1 156 56v32a4 4 0 0 0 8 0V58.74a94 94 0 0 1 22 12.08a4 4 0 0 0 5.4-.59l21.84-25.11A4 4 0 0 1 220 48Zm-128 4a8 8 0 1 1-8-8a8 8 0 0 1 8 8m88 0a8 8 0 1 1-8-8a8 8 0 0 1 8 8"
-                ></path>
-              </svg>
-            </button>
-            <button
-              type="button"
-              className={
-                options.includes("valeur-bouton2")
-                  ? "btn-iconsPost toggleBtn"
-                  : "btn-iconsPost"
-              }
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.3rem"
-                height="1.3rem"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M2 16h15v3H2zm18.5 0H22v3h-1.5zM18 16h1.5v3H18zm.85-8.27c.62-.61 1-1.45 1-2.38C19.85 3.5 18.35 2 16.5 2v1.5c1 0 1.85.83 1.85 1.85S17.5 7.2 16.5 7.2v1.5c2.24 0 4 1.83 4 4.07V15H22v-2.24c0-2.22-1.28-4.14-3.15-5.03m-2.82 2.47H14.5c-1 0-1.85-.98-1.85-2s.85-1.75 1.85-1.75v-1.5a3.35 3.35 0 0 0-3.35 3.35a3.35 3.35 0 0 0 3.35 3.35h1.53c1.05 0 1.97.74 1.97 2.05V15h1.5v-1.64c0-1.81-1.6-3.16-3.47-3.16"
-                ></path>
-              </svg>
-            </button>
+              <img src={postPicture} alt="" className="postPicture" />
+            </div>
+            <div className="detailsContainerContents">
+              <span>
+                {/* <b>Phone n°</b> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.5rem"
+                  height="1.5rem"
+                  viewBox="0 0 24 24"
+                  className="descrIcon"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M19 17.47c-.88-.07-1.75-.22-2.6-.45l-1.19 1.19c1.2.41 2.48.67 3.8.75v-1.49zM5.03 5c.09 1.32.35 2.59.75 3.8l1.2-1.2c-.23-.84-.38-1.71-.44-2.6z"
+                    opacity={0.3}
+                  ></path>
+                  <path
+                    fill="currentColor"
+                    d="M9.07 7.57A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1c0 9.39 7.61 17 17 17c.55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1c-1.24 0-2.45-.2-3.57-.57a.84.84 0 0 0-.31-.05c-.26 0-.51.1-.71.29l-2.2 2.2a15.149 15.149 0 0 1-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02m7.33 9.45c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75zM5.79 8.8c-.41-1.21-.67-2.48-.76-3.8h1.5a13 13 0 0 0 .46 2.59z"
+                  ></path>
+                </svg>
+                <b>{phone}</b>
+              </span>
+              <span className="postOptions">
+                <button
+                  type="button"
+                  className={
+                    options.includes("valeur-button1")
+                      ? "btn-iconsPost toggleBtn"
+                      : "btn-iconsPost"
+                  }
+                  data-value="valeur-button1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.3rem"
+                    height="1.3rem"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M220.59 36.94a11.83 11.83 0 0 0-13.08 2.61l-.19.2l-19.55 22.49a107.1 107.1 0 0 0-119.54 0L48.68 39.75l-.19-.2A12 12 0 0 0 28 48v88c0 50.72 44.86 92 100 92s100-41.27 100-92V48a11.82 11.82 0 0 0-7.41-11.06M220 136c0 45.09-39.12 82-88 83.91v-26.25l14.83-14.83a4 4 0 1 0-5.66-5.65L128 186.35l-13.17-13.17a4 4 0 1 0-5.66 5.65L124 193.66v26.26C75.12 218 36 181.1 36 136V48a3.93 3.93 0 0 1 2.47-3.7a4.4 4.4 0 0 1 1.6-.31a3.77 3.77 0 0 1 2.67 1.1l21.84 25.14a4 4 0 0 0 5.4.59A94 94 0 0 1 92 58.74V88a4 4 0 0 0 8 0V56a100 100 0 0 1 24-3.93V88a4 4 0 0 0 8 0V52.09A100 100 0 0 1 156 56v32a4 4 0 0 0 8 0V58.74a94 94 0 0 1 22 12.08a4 4 0 0 0 5.4-.59l21.84-25.11A4 4 0 0 1 220 48Zm-128 4a8 8 0 1 1-8-8a8 8 0 0 1 8 8m88 0a8 8 0 1 1-8-8a8 8 0 0 1 8 8"
+                    ></path>
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className={
+                    options.includes("valeur-bouton2")
+                      ? "btn-iconsPost toggleBtn"
+                      : "btn-iconsPost"
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.3rem"
+                    height="1.3rem"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M2 16h15v3H2zm18.5 0H22v3h-1.5zM18 16h1.5v3H18zm.85-8.27c.62-.61 1-1.45 1-2.38C19.85 3.5 18.35 2 16.5 2v1.5c1 0 1.85.83 1.85 1.85S17.5 7.2 16.5 7.2v1.5c2.24 0 4 1.83 4 4.07V15H22v-2.24c0-2.22-1.28-4.14-3.15-5.03m-2.82 2.47H14.5c-1 0-1.85-.98-1.85-2s.85-1.75 1.85-1.75v-1.5a3.35 3.35 0 0 0-3.35 3.35a3.35 3.35 0 0 0 3.35 3.35h1.53c1.05 0 1.97.74 1.97 2.05V15h1.5v-1.64c0-1.81-1.6-3.16-3.47-3.16"
+                    ></path>
+                  </svg>
+                </button>
 
-            <button
-              type="button"
-              className={
-                options.includes("valeur-bouton3")
-                  ? "btn-iconsPost toggleBtn"
-                  : "btn-iconsPost"
-              }
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.3rem"
-                height="1.3rem"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M9.5 18H8V9h1.5zm3.25 0h-1.5V9h1.5zM16 18h-1.5V9H16zm1-12h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2c0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6.5-2.5h3V6h-3zM17 19H7V8h10z"
-                ></path>
-              </svg>
-            </button>
-            <button
-              type="button"
-              className={
-                options.includes("valeur-bouton4")
-                  ? "btn-iconsPost toggleBtn"
-                  : "btn-iconsPost"
-              }
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.3rem"
-                height="1.3rem"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  fill="currentColor"
-                  d="M108 136a16 16 0 1 1-16-16a16 16 0 0 1 16 16m56-16a16 16 0 1 0 16 16a16 16 0 0 0-16-16m68.24 26.18a20.4 20.4 0 0 1-8.41 1.85a19.6 19.6 0 0 1-3.83-.39V184a44.05 44.05 0 0 1-44 44H80a44.05 44.05 0 0 1-44-44v-36.37a19 19 0 0 1-3.85.39a20.3 20.3 0 0 1-8.39-1.84a19.71 19.71 0 0 1-11.4-21.9l16.42-88a20 20 0 0 1 24.51-15.69l.47.13l52 15.27h44.54l52-15.27l.47-.13a20 20 0 0 1 24.51 15.72l16.42 88a19.71 19.71 0 0 1-11.46 21.87m-60-91.63L217 112.42l-12.56-67.33ZM39 112.42l44.76-57.87l-32.2-9.46ZM196 184v-59.52L146.11 60h-36.22L60 124.48V184a20 20 0 0 0 20 20h36v-7l-12.48-12.49a12 12 0 0 1 17-17L128 175l7.51-7.52a12 12 0 0 1 17 17L140 197v7h36a20 20 0 0 0 20-20"
-                ></path>
-              </svg>
-            </button>
-          </span>
+                <button
+                  type="button"
+                  className={
+                    options.includes("valeur-bouton3")
+                      ? "btn-iconsPost toggleBtn"
+                      : "btn-iconsPost"
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.3rem"
+                    height="1.3rem"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M9.5 18H8V9h1.5zm3.25 0h-1.5V9h1.5zM16 18h-1.5V9H16zm1-12h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2c0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6.5-2.5h3V6h-3zM17 19H7V8h10z"
+                    ></path>
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className={
+                    options.includes("valeur-bouton4")
+                      ? "btn-iconsPost toggleBtn"
+                      : "btn-iconsPost"
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.3rem"
+                    height="1.3rem"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M108 136a16 16 0 1 1-16-16a16 16 0 0 1 16 16m56-16a16 16 0 1 0 16 16a16 16 0 0 0-16-16m68.24 26.18a20.4 20.4 0 0 1-8.41 1.85a19.6 19.6 0 0 1-3.83-.39V184a44.05 44.05 0 0 1-44 44H80a44.05 44.05 0 0 1-44-44v-36.37a19 19 0 0 1-3.85.39a20.3 20.3 0 0 1-8.39-1.84a19.71 19.71 0 0 1-11.4-21.9l16.42-88a20 20 0 0 1 24.51-15.69l.47.13l52 15.27h44.54l52-15.27l.47-.13a20 20 0 0 1 24.51 15.72l16.42 88a19.71 19.71 0 0 1-11.46 21.87m-60-91.63L217 112.42l-12.56-67.33ZM39 112.42l44.76-57.87l-32.2-9.46ZM196 184v-59.52L146.11 60h-36.22L60 124.48V184a20 20 0 0 0 20 20h36v-7l-12.48-12.49a12 12 0 0 1 17-17L128 175l7.51-7.52a12 12 0 0 1 17 17L140 197v7h36a20 20 0 0 0 20-20"
+                    ></path>
+                  </svg>
+                </button>
+              </span>
+            </div>
+          </div>
         </div>
 
         {showDltPost && (
@@ -318,6 +341,13 @@ function Post({
             showDltPost={showDltPost}
             setShowDltPost={setShowDltPost}
             postId={postId}
+          />
+        )}
+        {showFullSize && (
+          <FullSizePicture
+            postPicture={postPicture}
+            showFullSize={showFullSize}
+            setShowFullSize={setShowFullSize}
           />
         )}
       </div>

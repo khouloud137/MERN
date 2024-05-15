@@ -96,6 +96,7 @@ function Posts({ search }) {
                 creatorId={post.creator._id}
                 postId={post._id}
                 appliedUsers={post.appliedUsers}
+                postPicture={post.postPicture}
               />
             );
           })}

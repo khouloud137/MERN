@@ -8,18 +8,8 @@ const fs = require("fs");
 cloudinary.config({
   cloud_name: process.env.CLOUDNAME,
   api_key: process.env.APIKEY,
-  api_secret: process.env.APISECRET, // Click 'View Credentials' below to copy your API secret
+  api_secret: process.env.APISECRET,
 });
-
-//     const storage = new CloudinaryStorage({
-//   cloudinary: cloudinary,
-//   params: {
-//     folder: 'uploads', // Dossier dans lequel stocker les fichiers sur Cloudinary
-//     allowed_formats: ['jpg', 'png', 'jpeg'], // Formats de fichier autorisés
-//     // Transformation optionnelle à appliquer aux fichiers téléchargés (redimensionnement, recadrage, etc.)
-//     transformation: [{ width: 500, height: 500, crop: 'limit' }]
-//   }
-// });
 
 exports.signup = async (req, res) => {
   const data = {
@@ -84,35 +74,54 @@ exports.Setting = async (req, res) => {
   const { firstname, lastname, bio, email } = req.body;
   const updatedData = {};
   if (firstname !== "") {
-    updatedData = { ...updatedData, firstname: firstname };
+    updatedData.firstname = firstname;
   }
   if (lastname !== "") {
-    updatedData = { ...updatedData, lastname: lastname };
+    updatedData.lastname = lastname;
   }
   if (bio !== "") {
-    updatedData = { ...updatedData, bio: bio };
+    updatedData.bio = bio;
   }
   if (email !== "") {
-    updatedData = { ...updatedData, email: email };
+    updatedData.email = email;
   }
-  if (req.file) {
-    const uploadResult = await cloudinary.uploader
-      .upload(req.file.path)
-      .catch((error) => {
-        console.log(error);
-      });
 
-    if (uploadResult) {
-      updatedData.profilePicture = uploadResult.url;
+  try {
+    if (req.file) {
+      const uploadResult = await cloudinary.uploader
+        .upload(req.file.path)
+        .catch((error) => {
+          console.log(error);
+        });
 
-      // Remove the file from file system after successful upload
-      fs.unlink(req.file.path, (err) => {
-        if (err) {
-          console.error("Error deleting file:", err);
-        } else {
-          console.log("File deleted successfully");
-        }
-      });
+      if (uploadResult) {
+        updatedData.profilePicture = uploadResult.url;
+
+        // Remove the file from file system after successful upload
+        fs.unlink(req.file.path, (err) => {
+          if (err) {
+            console.error("Error deleting file:", err);
+          }
+        });
+      }
     }
+    if (Object.keys(updatedData).length > 0) {
+      const userID = req.user.data.id;
+      const updatedUser = await User.findByIdAndUpdate(userID, updatedData, {
+        new: true,
+        select: "-password",
+      });
+      if (updatedUser) {
+        res.status(200).json({
+          status: "success",
+          message: "User has been updated",
+          data: updatedUser,
+        });
+      }
+    } else {
+      res.status(400).json({ status: "fail", message: "failed user update" });
+    }
+  } catch (error) {
+    res.status(500).json({ status: "error", message: "error" });
   }
 };

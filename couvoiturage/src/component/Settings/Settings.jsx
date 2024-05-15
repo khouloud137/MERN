@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Settings.css";
 import apiClient from "../../utility/apiClient";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+
 
 function Settings({ showSettings, setShowSettings }) {
   const [formData, setFormData] = useState({
@@ -11,30 +12,38 @@ function Settings({ showSettings, setShowSettings }) {
     email: "",
     bio: "",
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-   const handleFileChange = (e) => {
-     setFormData({ ...formData, profilePicture: e.target.files[0] });
-   };
-const handleSubmit = (e) => {
-e.preventDefault()
-const fromDatatosend = new FormData();
-Object.entries(formData).forEach(([key,value])=>{
-  fromDatatosend.append(key,value);
-});
- toast.promise(
-   apiClient.put("/users/Setting", fromDatatosend, {
-     headers: { "Content-Type": "multipart/form-data" },
-   })
- ,
-   {
-     pending: "'Updating settings...'",
-     success: "File uploaded successfully",
-     error: "Failed to upload file",
-   });
-}
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, profilePicture: e.target.files[0] });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const fromDatatosend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      fromDatatosend.append(key, value);
+    });
+
+    toast.promise(
+      apiClient
+        .put("/users/Setting", fromDatatosend, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((res) => {
+          localStorage.setItem("user_data", JSON.stringify(res.data.data));
+          setShowSettings(!showSettings);
+        }),
+      {
+        pending: "'Updating settings...'",
+        success: "File uploaded successfully",
+        error: "Failed to upload file",
+      }
+    );
+  };
+
   return (
     <div className="SettingsWrapper">
       <div className="Settings">

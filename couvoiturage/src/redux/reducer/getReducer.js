@@ -12,7 +12,6 @@ const getReducer = (state = initialState, action) => {
         error: null,
       };
     case "GET_POST_SUCCESS":
-      // console.log(action.payload);
       return {
         ...state,
         loading: false,

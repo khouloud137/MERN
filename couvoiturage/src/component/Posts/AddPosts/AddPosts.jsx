@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 function AddPosts({ togglePost }) {
   const [post, setPost] = useState({
+    postPicture: null,
     adressePart: "",
     adresseArrive: "",
     date: "",
@@ -17,15 +18,20 @@ function AddPosts({ togglePost }) {
     creator: "",
     options: [],
   });
-
   // const userID = useSelector((state) => state.users.user);
-
   const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addPost(post));
+    const formData = new FormData();
+    Object.entries(post).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    dispatch(addPost(formData));
+
     e.target.reset();
     setPost({
+      postPicture: null,
       adressePart: "",
       adresseArrive: "",
       date: "",
@@ -63,17 +69,29 @@ function AddPosts({ togglePost }) {
     >
       <label style={{ display: "block", width: "100%" }}>New post</label>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="postPicture">Post photo: </label>
+        <input
+          type="file"
+          className="addPostInput"
+          name="postPicture"
+          required
+          onChange={(e) => setPost({ ...post, postPicture: e.target.files[0] })}
+        />
         <div className="inputRow">
           <input
             className="addPostInput"
+            name="adressePart"
             type="text"
             placeholder="Adresse depart"
+            required
             onChange={(e) => setPost({ ...post, adressePart: e.target.value })}
           />
           <input
             className="addPostInput"
+            name="adresseArrive"
             type="text"
             placeholder=" Adtesse arrivé"
+            required
             onChange={(e) =>
               setPost({ ...post, adresseArrive: e.target.value })
             }
@@ -81,30 +99,38 @@ function AddPosts({ togglePost }) {
         </div>
         <input
           className="addPostInput"
+          name="date"
           type="date"
           placeholder="date"
+          required
           onChange={(e) => setPost({ ...post, date: e.target.value })}
         />
         <input
           className="addPostInput"
+          name="time"
           type="time"
           placeholder="time"
+          required
           onChange={(e) => setPost({ ...post, time: e.target.value })}
         />
 
         <div className="inputRow">
           <input
             className="addPostInput"
+            name="numplace"
             type="number"
             placeholder="membres"
             min={1}
             max={4}
+            required
             onChange={(e) => setPost({ ...post, numplace: e.target.value })}
           />
           <input
             className="addPostInput"
+            name="prix"
             type="text"
             placeholder="prix"
+            required
             onChange={(e) => setPost({ ...post, prix: e.target.value })}
           />
         </div>
@@ -113,7 +139,7 @@ function AddPosts({ togglePost }) {
           type="tel"
           name="phone"
           pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"
-          placeholder="phone"
+          placeholder="Phone, example: 00-000-000"
           required
           onChange={(e) => setPost({ ...post, phone: e.target.value })}
         />
@@ -129,7 +155,6 @@ function AddPosts({ togglePost }) {
               width="1.9em"
               height="1.9em"
               viewBox="0 0 256 256"
-              
             >
               <path
                 fill="currentColor"

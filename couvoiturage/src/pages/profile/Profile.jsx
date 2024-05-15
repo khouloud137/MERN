@@ -48,6 +48,7 @@ function Profile({ showSettings, setShowSettings }) {
                     profilePicture={post.creator.profilePicture}
                     creatorId={post.creator._id}
                     postId={post._id}
+                    postPicture={post.postPicture}
                   />
                 );
               })}

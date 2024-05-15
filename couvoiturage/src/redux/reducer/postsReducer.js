@@ -13,7 +13,6 @@ const postReducer = (state = initialState, action) => {
         error: null,
       };
     case "ADD_POST_SUCCESS":
-      console.log(action.payload)
       return {
         ...state,
         loading: false,

@@ -27,11 +27,13 @@ export const addPost = (postData) => {
   return (dispatch) => {
     dispatch(addPostRequest());
     return apiClient
-      .post("/posts/AddPost", postData)
+      .post("/posts/AddPost", postData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((result) => {
         dispatch(addPostSuccess(result));
         dispatch(fetchPosts());
-        dispatch(fetchUserPosts())
+        dispatch(fetchUserPosts());
       })
       .catch((err) => {
         console.log(err);
@@ -39,4 +41,3 @@ export const addPost = (postData) => {
       });
   };
 };
-

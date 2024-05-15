@@ -1,6 +1,15 @@
 const POST = require("../models/posts.model");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+const fs = require("fs");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDNAME,
+  api_key: process.env.APIKEY,
+  api_secret: process.env.APISECRET,
+});
 
 exports.GetAllposts = async (req, res) => {
   try {
@@ -16,7 +25,28 @@ exports.GetAllposts = async (req, res) => {
 
 exports.AddPost = async (req, res) => {
   const postData = { ...req.body, creator: req.user.data.id };
+  if (postData.options.length > 0) {
+    postData.options = postData.options.split(",");
+  }
+
   try {
+    if (req.file) {
+      const uploadResult = await cloudinary.uploader
+        .upload(req.file.path)
+        .catch((error) => {
+          console.log(error);
+        });
+
+      if (uploadResult) {
+        postData.postPicture = uploadResult.url;
+
+        fs.unlink(req.file.path, (err) => {
+          if (err) {
+            console.error("Error deleting file:", err);
+          }
+        });
+      }
+    }
     const post = await POST.create(postData);
     if (post) {
       res.json({ status: "success", message: "post added" });
@@ -27,6 +57,7 @@ exports.AddPost = async (req, res) => {
     res.status(500).json({ status: "error", message: "error" });
   }
 };
+
 exports.DeletePost = async (req, res) => {
   const params = req.params;
   try {
@@ -41,6 +72,7 @@ exports.DeletePost = async (req, res) => {
     res.status(500).json({ status: "error", message: "error" });
   }
 };
+
 exports.UpdatePost = async (req, res) => {
   const params = req.params;
   const updatepost = req.body;
@@ -90,6 +122,7 @@ exports.putPost = async (req, res) => {
 
     PUTPOST.appliedUsers.push(params.userID);
     PUTPOST.numplace = PUTPOST.numplace - 1;
+
     await PUTPOST.save();
 
     res.json({ status: "success", data: PUTPOST });

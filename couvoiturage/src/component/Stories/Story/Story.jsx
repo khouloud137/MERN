@@ -24,15 +24,16 @@ function Story(props) {
         <div
           className="story old"
           style={{
-            backgroundImage: `url(${data.story_photo})`,
+            backgroundImage: `url(${data.postPicture})`,
             backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         >
           <div className="user-details">
-            <img src={data.user_photo} alt="" />
+            <img src={data.creator.profilePicture} alt="" />
           </div>
 
-          <h3>{data.username}</h3>
+          <h3>{data.creator.firstname}</h3>
         </div>
       )}
     </>

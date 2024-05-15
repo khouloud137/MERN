@@ -17,15 +17,6 @@ function Login() {
   const navigate = useNavigate();
   const userSentEmail = useSelector((state) => state.users.tempEmail);
 
-  useEffect(() => {
-    if (userSentEmail) {
-      document.querySelector("#loginEmailInput").value = userSentEmail;
-    }
-    return () => {
-      dispatch(unsetEmail());
-    };
-  }, [dispatch, userSentEmail]);
-
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
@@ -34,6 +25,16 @@ function Login() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (userSentEmail) {
+      document.querySelector("#loginEmailInput").value = userSentEmail;
+      setUserLogin({ ...userLogin, email: userSentEmail });
+    }
+    return () => {
+      dispatch(unsetEmail());
+    };
+  }, [dispatch, userSentEmail, userLogin]);
 
   const formvalidation = () => {
     let status = true;

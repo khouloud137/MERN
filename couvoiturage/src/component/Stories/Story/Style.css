@@ -53,6 +53,7 @@
 .old .user-details img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   border-radius: 5px;
 }
 .old h3 {
@@ -61,4 +62,5 @@
   font-weight: bold;
   margin-bottom: 20px;
   font-size: 12px;
+  text-shadow: 0 0 10px black;
 }
