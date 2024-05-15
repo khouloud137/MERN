@@ -2,6 +2,11 @@ import React from "react";
 import "./Style.css";
 function Story(props) {
   const { type, data } = props;
+  const profilePicture = data?.creator?.profilePicture || "";
+  const firstname = data?.creator ? data.creator.firstname : "";
+  console.log(data);
+
+
   return (
     <>
       {type === "new" ? (
@@ -24,16 +29,19 @@ function Story(props) {
         <div
           className="story old"
           style={{
-            backgroundImage: `url(${data.postPicture})`,
+            backgroundImage: `url(${
+              data?.postPicture
+                ? data.postPicture
+                : "https://images.pexels.com/photos/845405/pexels-photo-845405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            })`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           <div className="user-details">
-            <img src={data.creator.profilePicture} alt="" />
+            {profilePicture && <img src={profilePicture} alt="" />}
           </div>
-
-          <h3>{data.creator.firstname}</h3>
+          {firstname && <h3>{firstname}</h3>}
         </div>
       )}
     </>

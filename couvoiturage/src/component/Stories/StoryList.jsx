@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 function StoryList() {
   const postsData = useSelector((state) => state.getposts);
   const cropedData = postsData.posts.toReversed().slice(0, 3);
+
   // const stories = [
   //   {
   //     username: "ahmed",

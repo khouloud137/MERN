@@ -33,11 +33,13 @@ export const fetchPosts = () => {
 export const applyPost = (applyData) => {
   return (dispatch) => {
     return apiClient
-      .put(`posts/PUTPOST/${applyData.postId}/${applyData.userID}`)
+      .put(`/posts/PUTPOST/${applyData.postId}/${applyData.userID}`)
       .then((response) => {
         console.log("Post updated successfully:", response);
         dispatch(fetchPosts());
+        console.log(response);
       })
+
       .catch((err) => {
         console.log(err);
       });

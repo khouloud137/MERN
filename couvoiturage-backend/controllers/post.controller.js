@@ -115,6 +115,7 @@ exports.putPost = async (req, res) => {
     }
 
     const PUTPOST = await POST.findById(params.id);
+
     if (!PUTPOST) {
       res.status(404).json({ status: "error", message: "Post not found" });
       return;
