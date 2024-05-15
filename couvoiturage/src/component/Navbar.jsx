@@ -22,7 +22,7 @@ function Navbar() {
     <>
       <div className="navbar-container">
         <NavLink to="/" id="Logo">
-          <img src="./assets/LOGO.png" alt="" />
+          <img src="./assets/LOGO-2.png" alt="" />
         </NavLink>
 
         <div className="nav">
