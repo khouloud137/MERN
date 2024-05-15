@@ -1,19 +1,31 @@
 import React from "react";
 import "./FilterSearch.css";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import {
+  adresseArriveSetter,
+  adressePartSetter,
+  dateSetter,
+  numplaceSetter,
+  optionsSetter,
+  prixSetter,
+  timeSetter,
+} from "../../redux/actions/searchActions";
 
-function FilterSearch({ setsearchvalue, search }) {
+function FilterSearch() {
+  let search = [];
+  const dispatch = useDispatch();
   const handleicons = (e) => {
     if (e.target.classList.contains("toggleIcons")) {
       e.target.classList.remove("toggleIcons");
       const value = e.currentTarget.getAttribute("data-value");
-      const removedData = search.options.filter((item) => item.includes(value));
-      setsearchvalue({ ...search, options: removedData });
+      search = search.filter((item) => !item.includes(value));
     } else {
       e.target.classList.add("toggleIcons");
       const value = e.currentTarget.getAttribute("data-value");
-      setsearchvalue({ ...search, options: [...search.options, value] });
+      search = [...search, value];
     }
+    dispatch(optionsSetter(search));
   };
 
   return (
@@ -31,50 +43,26 @@ function FilterSearch({ setsearchvalue, search }) {
           className="addPostInput"
           type="text"
           placeholder="Adresse depart"
-          onChange={(e) => {
-            setsearchvalue({
-              ...search,
-              adressePart: e.target.value,
-              globalSearch: "",
-            });
-          }}
+          onChange={(e) => dispatch(adressePartSetter(e.target.value))}
         />
         <input
           className="addPostInput"
           type="text"
           placeholder=" Adtesse arrivé"
-          onChange={(e) => {
-            setsearchvalue({
-              ...search,
-              adresseArrive: e.target.value,
-              globalSearch: "",
-            });
-          }}
+          onChange={(e) => dispatch(adresseArriveSetter(e.target.value))}
         />
 
         <input
           className="addPostInput"
           type="date"
           placeholder="date"
-          onChange={(e) => {
-            setsearchvalue({
-              ...search,
-              date: e.target.value,
-              globalSearch: "",
-            });
-          }}
+          onChange={(e) => dispatch(dateSetter(e.target.value))}
         />
         <input
           className="addPostInput"
           type="time"
           placeholder="time"
-          onChange={(e) => {
-            setsearchvalue({
-              ...search,
-              time: e.target.value,
-              globalSearch: "",
-            });
-          }}
+          onChange={(e) => dispatch(timeSetter(e.target.value))}
         />
 
         <input
@@ -83,25 +71,13 @@ function FilterSearch({ setsearchvalue, search }) {
           placeholder="membres"
           min={0}
           max={4}
-          onChange={(e) => {
-            setsearchvalue({
-              ...search,
-              numplace: Number(e.target.value),
-              globalSearch: "",
-            });
-          }}
+          onChange={(e) => dispatch(numplaceSetter(Number(e.target.value)))}
         />
         <input
           className="addPostInput"
           type="text"
           placeholder="prix"
-          onChange={(e) => {
-            setsearchvalue({
-              ...search,
-              prix: e.target.value,
-              globalSearch: "",
-            });
-          }}
+          onChange={(e) => dispatch(prixSetter(e.target.value))}
         />
 
         {/* <input

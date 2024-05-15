@@ -3,8 +3,8 @@ import "./Style.css";
 function Story(props) {
   const { type, data } = props;
   const profilePicture = data?.creator?.profilePicture || "";
-  const firstname = data?.creator ? data.creator.firstname : "";
-  console.log(data);
+  const firstname = data?.creator?.firstname || "";
+ 
 
 
   return (

@@ -6,11 +6,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../../redux/actions/getALLpostAction";
 
-function Posts({ search }) {
+function Posts() {
   const dispatch = useDispatch();
   const postsData = useSelector((state) => state.getposts);
   const errors = useSelector((state) => state.getposts.errors);
   const loading = useSelector((state) => state.getposts.loading);
+  const searchValues = useSelector((state) => state.searchValues);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -28,46 +29,50 @@ function Posts({ search }) {
       return (
         post.adressePart
           .toLowerCase()
-          .includes(search.globalSearch.toLowerCase()) ||
+          .includes(searchValues.globalSearch.toLowerCase()) ||
         post.adresseArrive
           .toLowerCase()
-          .includes(search.globalSearch.toLowerCase()) ||
-        post.prix.toLowerCase().includes(search.globalSearch.toLowerCase())
+          .includes(searchValues.globalSearch.toLowerCase()) ||
+        post.prix
+          .toLowerCase()
+          .includes(searchValues.globalSearch.toLowerCase())
       );
     })
     .filter((post) => {
-      if (search.date && search.time) {
+      if (searchValues.date && searchValues.time) {
         return (
           post.adressePart
             .toLowerCase()
-            .includes(search.adressePart.toLowerCase()) &&
+            .includes(searchValues.adressePart.toLowerCase()) &&
           post.adresseArrive
             .toLowerCase()
-            .includes(search.adresseArrive.toLowerCase()) &&
-          post.prix.toLowerCase().includes(search.prix.toLowerCase()) &&
-          post.date === search.date &&
-          post.time === search.time
+            .includes(searchValues.adresseArrive.toLowerCase()) &&
+          post.prix.toLowerCase().includes(searchValues.prix.toLowerCase()) &&
+          post.date === searchValues.date &&
+          post.time >= searchValues.time
         );
       }
       return (
         post.adressePart
           .toLowerCase()
-          .includes(search.adressePart.toLowerCase()) &&
+          .includes(searchValues.adressePart.toLowerCase()) &&
         post.adresseArrive
           .toLowerCase()
-          .includes(search.adresseArrive.toLowerCase()) &&
-        post.prix.toLowerCase().includes(search.prix.toLowerCase())
+          .includes(searchValues.adresseArrive.toLowerCase()) &&
+        post.prix.toLowerCase().includes(searchValues.prix.toLowerCase())
       );
     })
     .filter((post) => {
-      if (search.options.length > 0) {
-        return search.options.every((option) => post.options.includes(option));
+      if (searchValues.options.length > 0) {
+        return searchValues.options.every((option) =>
+          post.options.includes(option)
+        );
       }
       return true;
     })
     .filter((post) => {
-      if (search.numplace > 0) {
-        return post.numplace === search.numplace;
+      if (searchValues.numplace > 0) {
+        return post.numplace === searchValues.numplace;
       }
       return true;
     });

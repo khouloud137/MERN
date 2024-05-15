@@ -39,6 +39,10 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  transition: color 0.3s;
+}
+#showAdSearchBtn:hover {
+  color: #459900;
 }
 .adSearchSecondLayer {
   width: 100%;

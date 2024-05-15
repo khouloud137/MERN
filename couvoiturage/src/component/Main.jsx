@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { adresseHomeSearchSetter } from "../redux/actions/searchActions";
 
 function Main() {
+  const [homeSearch, setHomeSearch] = useState({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = localStorage.getItem("user_data");
+
   return (
     <div className="main-container">
       <h2 className="main-title">
@@ -19,16 +27,39 @@ function Main() {
           écologique et surtout plus convivial.
         </h5>
       </div>
-      <div className="filter">
+      <form
+        className="filter"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (user) {
+            dispatch(adresseHomeSearchSetter(homeSearch));
+            navigate("/publications");
+          } else {
+            navigate("/login");
+          }
+        }}
+      >
         <div className="homeFilterInputs">
           <input
             type="text"
             placeholder="Adresse de depart"
             className="input-filter"
+            required
+            onChange={(e) =>
+              setHomeSearch({ ...homeSearch, adressePart: e.target.value })
+            }
           />
-          <input type="text" placeholder="arrivé" className="input-filter" />
+          <input
+            type="text"
+            placeholder="arrivé"
+            className="input-filter"
+            required
+            onChange={(e) =>
+              setHomeSearch({ ...homeSearch, adresseArrive: e.target.value })
+            }
+          />
         </div>
-        <button type="button" id="homeFilterBtn">
+        <button type="submit" id="homeFilterBtn">
           Trouve-moi un trajet &nbsp;
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +76,7 @@ function Main() {
             ></path>
           </svg>
         </button>
-      </div>
+      </form>
     </div>
   );
 }

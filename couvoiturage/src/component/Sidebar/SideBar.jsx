@@ -86,6 +86,7 @@ function SideBar({ showSettings, setShowSettings }) {
             </svg>
             <b>setting</b>
           </Link>
+          <hr />
           <Link to="/logout" className="sideBarLinks" onClick={handleLogout}>
             <svg
               className="me-3"

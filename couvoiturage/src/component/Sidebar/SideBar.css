@@ -29,12 +29,12 @@
   transition: all 0.1s;
 }
 .sidebar_menu .sideBarLinks:hover {
-  border-left: 3px solid #096bdb;
-  background-color: #eff3f3;
-  color: #1877f2;
+  border-left: 3px solid #f5ff78;
+  background-color: #eff3f0;
+  color: #459900;
 }
 .sidebar_menu .sideBarLinks:hover .me-3 {
-  color: #1877f2;
+  color: #459900;
 }
 .me-3 {
   margin-right: 15px;

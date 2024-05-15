@@ -2,28 +2,19 @@ import React, { useState } from "react";
 import "./SideBarRight.css";
 import FilterSearch from "../FilterSearch/FilterSearch";
 import { AnimatePresence } from "framer-motion";
+import { globalSearchSetter } from "../../redux/actions/searchActions";
+import { useDispatch } from "react-redux";
 
-function SideBarRight({ setsearchvalue, search }) {
+function SideBarRight() {
   const [showAdSearch, setShowAdSearch] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <div className="SideBarRight">
       <input
         className="PublicationsInput"
         placeholder="Search..."
-        onChange={(e) => {
-          setsearchvalue({
-            adressePart: "",
-            adresseArrive: "",
-            prix: "",
-            numplace: 0,
-            date: "",
-            time: "",
-            phone: "",
-            options: [],
-            globalSearch: e.target.value,
-          });
-        }}
+        onChange={(e) => dispatch(globalSearchSetter(e.target.value))}
       />
       <button
         type="button"
@@ -65,7 +56,7 @@ function SideBarRight({ setsearchvalue, search }) {
       <div className="adSearchSecondLayer">
         <AnimatePresence mode="wait">
           {showAdSearch && (
-            <FilterSearch search={search} setsearchvalue={setsearchvalue} />
+            <FilterSearch  />
           )}
         </AnimatePresence>
       </div>

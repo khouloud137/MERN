@@ -35,7 +35,7 @@ function Post({
   const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
   const pathname = useLocation().pathname;
   const user = JSON.parse(localStorage.getItem("user_data"));
-  const userID = user.id;
+  const userID = user._id;
   const dispatch = useDispatch();
 
   const handelApply = (postId, userID) => {
@@ -47,7 +47,7 @@ function Post({
   const handelCancel = (postId, userID) => {
     dispatch(cancelPost({ postId, userID }));
   };
-
+  console.log(creatorId, "____", userID);
   return (
     <>
       <div className="post">

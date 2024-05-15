@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import SideBar from "../../component/Sidebar/SideBar";
 import "../../pages/publications/Publication.css";
 import StoryList from "../../component/Stories/StoryList";
 import Posts from "../../component/Posts/Posts";
 import SideBarRight from "../../component/Sidebar/SideBarRight";
+import { useDispatch } from "react-redux";
+import { clearValues } from "../../redux/actions/searchActions";
 
 function Publications({ showSettings, setShowSettings }) {
-  const [search, setsearchvalue] = useState({
-    adressePart: "",
-    adresseArrive: "",
-    prix: "",
-    numplace: 0,
-    date: "",
-    time: "",
-    phone: "",
-    options: [],
-    globalSearch: "",
-  });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearValues());
+    };
+  }, [dispatch]);
 
   return (
     <div className="publication_container">
@@ -31,11 +29,11 @@ function Publications({ showSettings, setShowSettings }) {
         <div className="middelBox" style={{ width: "50%" }}>
           {/* Middel Box */}
           <StoryList />
-          <Posts search={search} />
+          <Posts />
         </div>
         <div className="rightBox" style={{ width: "25%" }}>
           {/* right Box */}
-          <SideBarRight setsearchvalue={setsearchvalue} search={search} />
+          <SideBarRight />
         </div>
       </div>
     </div>
