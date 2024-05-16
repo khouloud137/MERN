@@ -14,7 +14,12 @@ router.post(
   postController.AddPost
 );
 router.delete("/DeletePost/:id", verifyToken, postController.DeletePost);
-router.put("/UpdatePost/:id", verifyToken, postController.UpdatePost);
+router.put(
+  "/UpdatePost",
+  upload.single("postPicture"),
+  verifyToken,
+  postController.UpdatePost
+);
 router.get("/GetUserposts", verifyToken, postController.GetUserposts);
 router.put("/PUTPOST/:id/:userID", verifyToken, postController.putPost);
 router.put("/cancelPut/:id/:userID", verifyToken, postController.cancelPost);

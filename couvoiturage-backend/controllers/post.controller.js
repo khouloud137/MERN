@@ -74,12 +74,51 @@ exports.DeletePost = async (req, res) => {
 };
 
 exports.UpdatePost = async (req, res) => {
-  const params = req.params;
-  const updatepost = req.body;
+  const {
+    postPicture,
+    adressePart,
+    adresseArrive,
+    date,
+    time,
+    numplace,
+    prix,
+    phone,
+    postId,
+    options,
+  } = req.body;
+  const newData = {
+    adressePart,
+    adresseArrive,
+    date,
+    time,
+    numplace,
+    prix,
+    phone,
+    options,
+  };
+
   try {
+    if(req.file){
+ const uploadResult = await cloudinary.uploader
+   .upload(req.file.path)
+   .catch((error) => {
+     console.log(error);
+   });
+      if (uploadResult) {
+        newData.postPicture = uploadResult.url;
+
+        fs.unlink(req.file.path, (err) => {
+          if (err) {
+            console.error("Error deleting file:", err);
+          }
+        });
+      }
+
+    }
+    
     const post = await POST.findByIdAndUpdate(
-      params.id,
-      { updatepost },
+      postId,
+      { newData },
       { new: true }
     );
 

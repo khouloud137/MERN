@@ -41,3 +41,22 @@ export const addPost = (postData) => {
       });
   };
 };
+
+export const editPost = (postData) => {
+  return (dispatch) => {
+    dispatch(addPostRequest());
+    return apiClient
+      .put("/posts/UpdatePost", postData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((result) => {
+        // dispatch(addPostSuccess(result));
+        dispatch(fetchPosts());
+        dispatch(fetchUserPosts());
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(addPostFailure(err.message));
+      });
+  };
+};

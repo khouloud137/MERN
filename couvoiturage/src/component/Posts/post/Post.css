@@ -82,10 +82,10 @@
 }
 
 .user_image {
-  object-fit: cover;
   overflow: hidden;
   width: 45px;
   height: 45px;
+  object-fit: cover;
   background-color: orangered;
   border-radius: 6px;
   margin-right: 10px;
