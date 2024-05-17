@@ -6,6 +6,7 @@
   padding: 10px;
   border-radius: 10px;
   overflow: hidden;
+  background-color: white;
   transition: all 0.5s;
 }
 .new_post_details {

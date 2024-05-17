@@ -25,7 +25,13 @@ function Posts() {
   }, [dispatch]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <img
+        src="/assets/loader.gif"
+        alt=""
+        width={"350px"}
+      />
+    );
   }
   if (errors) {
     return <p>Error: {errors}</p>;

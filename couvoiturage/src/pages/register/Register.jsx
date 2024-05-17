@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import {
   UserRegisterErrors,
   UserRegisterRequest,
@@ -64,16 +64,24 @@ function Register() {
         .then((result) => {
           dispatch(UserRegisterSuccess(result));
           navigate("/login");
-          // toast.success(" user created Successfully!");
+          toast.success(" user created Successfully!");
         })
         .catch((err) => {
           dispatch(UserRegisterErrors(err));
+          toast.error(err.response.data.message);
         });
     }
   }
 
   return (
     <div className="register">
+      <video
+        id="bgvid"
+        autoPlay
+        loop
+        muted
+        src="https://videos.pexels.com/video-files/4372788/4372788-uhd_3840_2024_24fps.mp4"
+      />
       <Toaster />
       <div className="register-cover"></div>
       <div className="register-content">

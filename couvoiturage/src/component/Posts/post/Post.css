@@ -9,6 +9,7 @@
   border-radius: 10px;
   /* background: url(https://freepngimg.com/download/icon/seo/442-announcement.png)
     center/cover no-repeat; */
+  background-color: white;
 }
 .post_user_details {
   display: flex;
@@ -59,7 +60,7 @@
   min-height: 200px;
   position: relative;
 }
-.post_content_details::before {
+.post_content_details::after {
   content: "";
   background-image: url("https://freepngimg.com/download/icon/seo/442-announcement.png");
   background-position: center;
@@ -71,7 +72,6 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: -1;
 }
 
 .post_user_details h5,
@@ -97,6 +97,7 @@
 .user_image img {
   width: 45px;
   height: 45px;
+  object-fit: cover;
 }
 .user_name {
   margin: 0;

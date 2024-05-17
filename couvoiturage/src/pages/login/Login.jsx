@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 //  import { useSelector } from "react-redux";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import "./Login.css";
 import {
@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../../utility/apiClient";
+import { Toast } from "react-bootstrap";
 
 function Login() {
   const dispatch = useDispatch();
@@ -60,17 +61,20 @@ function Login() {
 
     if (isValid) {
       dispatch(UserLoginRequest());
+      
       apiClient
         .post("/users/signin", userLogin)
         .then((result) => {
           dispatch(UserLoginSuccess(result));
-
+          toast.success(" user Login!");
+          
           localStorage.setItem("user_data", JSON.stringify(result.data.user));
           localStorage.setItem("token", result.data.token);
           navigate("/publications");
         })
         .catch((err) => {
           dispatch(UserLoginErrors(err));
+          toast.error(err.response.data.message);
         });
     } else {
       console.log(errors);
@@ -79,11 +83,18 @@ function Login() {
 
   return (
     <div className="login">
+      <video
+        id="bgvid"
+        autoPlay
+        loop
+        muted
+        src="https://videos.pexels.com/video-files/4372788/4372788-uhd_3840_2024_24fps.mp4"
+      />
       <Toaster />
       <div className="login-cover"></div>
       <div className="login-content">
         <div>
-          <h1>MON ESPACE</h1>
+          <h1>LOGIN</h1>
         </div>
       </div>
       <form>

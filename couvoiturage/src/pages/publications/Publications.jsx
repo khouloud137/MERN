@@ -9,7 +9,7 @@ import { clearValues } from "../../redux/actions/searchActions";
 
 function Publications({ showSettings, setShowSettings }) {
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     return () => {
       dispatch(clearValues());
