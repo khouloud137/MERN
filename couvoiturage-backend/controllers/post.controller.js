@@ -12,6 +12,7 @@ cloudinary.config({
 });
 
 exports.GetAllposts = async (req, res) => {
+
   try {
     const post = await POST.find().populate(
       "creator",
@@ -75,7 +76,6 @@ exports.DeletePost = async (req, res) => {
 
 exports.UpdatePost = async (req, res) => {
   const {
-    postPicture,
     adressePart,
     adresseArrive,
     date,
@@ -97,13 +97,17 @@ exports.UpdatePost = async (req, res) => {
     options,
   };
 
+  if (newData.options.length > 0) {
+    newData.options = newData.options.split(",");
+  }
+
   try {
-    if(req.file){
- const uploadResult = await cloudinary.uploader
-   .upload(req.file.path)
-   .catch((error) => {
-     console.log(error);
-   });
+    if (req.file) {
+      const uploadResult = await cloudinary.uploader
+        .upload(req.file.path)
+        .catch((error) => {
+          console.log(error);
+        });
       if (uploadResult) {
         newData.postPicture = uploadResult.url;
 
@@ -113,19 +117,14 @@ exports.UpdatePost = async (req, res) => {
           }
         });
       }
-
     }
-    
-    const post = await POST.findByIdAndUpdate(
-      postId,
-      { newData },
-      { new: true }
-    );
+
+    const post = await POST.findByIdAndUpdate(postId, newData, { new: true });
 
     if (post) {
       res.json({ status: "success", message: "post updated" });
     } else {
-      res.json({ status: "fail", message: "post was not updated" });
+      res.status(400).json({ status: "fail", message: "post was not updated" });
     }
   } catch (err) {
     res.status(500).json({ status: "error", message: "error" });

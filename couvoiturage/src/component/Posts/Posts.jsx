@@ -12,6 +12,13 @@ function Posts() {
   const errors = useSelector((state) => state.getposts.errors);
   const loading = useSelector((state) => state.getposts.loading);
   const searchValues = useSelector((state) => state.searchValues);
+  let date = new Date();
+  let currentDate =
+    date.getFullYear() +
+    "-" +
+    `0${date.getMonth() + 1}`.slice(-2) +
+    "-" +
+    `0${date.getDate()}`.slice(-2);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -25,6 +32,9 @@ function Posts() {
   }
 
   const filteredValue = postsData.posts
+    .filter((post) => {
+      return post.date >= currentDate;
+    })
     .filter((post) => {
       return (
         post.adressePart

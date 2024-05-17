@@ -74,14 +74,12 @@ function Post({
 
   const handleicons = (e) => {
     const value = e.currentTarget.getAttribute("data-value");
-
     if (e.target.classList.contains("toggleIcons")) {
       e.target.classList.remove("toggleIcons");
-      const removedData = post.options.filter((item) => item.includes(value));
+      const removedData = post.options.filter((item) => !item.includes(value));
       setPost({ ...post, options: removedData });
     } else {
       e.target.classList.add("toggleIcons");
-
       setPost({ ...post, options: [...post.options, value] });
     }
   };
@@ -201,7 +199,7 @@ function Post({
                 )}
               </button>
             )}
-            {creatorId === userID && (
+            {creatorId === userID && !showUpdatePost && (
               <button
                 type="button"
                 className="DeleteBtn"
@@ -388,10 +386,7 @@ function Post({
             TND
           </span>
           <div className="detailsContainer">
-            <div
-              className="postPictureWrapper"
-              onClick={() => setShowFullSize(!showFullSize)}
-            >
+            <div className="postPictureWrapper">
               {showUpdatePost ? (
                 <input
                   type="file"
@@ -402,7 +397,12 @@ function Post({
                   }
                 />
               ) : (
-                <img src={postPicture} alt="" className="postPicture" />
+                <img
+                  src={postPicture}
+                  alt=""
+                  className="postPicture"
+                  onClick={() => setShowFullSize(!showFullSize)}
+                />
               )}
             </div>
             <div className="detailsContainerContents">
@@ -445,7 +445,11 @@ function Post({
                   <>
                     <button
                       type="button"
-                      className="btn-icons"
+                      className={
+                        options.includes("valeur-button1")
+                          ? "btn-icons toggleIcons"
+                          : "btn-icons"
+                      }
                       data-value="valeur-button1"
                       onClick={handleicons}
                     >
@@ -463,7 +467,11 @@ function Post({
                     </button>
                     <button
                       type="button"
-                      className="btn-icons"
+                      className={
+                        options.includes("valeur-bouton2")
+                          ? "btn-icons toggleIcons"
+                          : "btn-icons"
+                      }
                       data-value="valeur-bouton2"
                       onClick={handleicons}
                     >
@@ -481,7 +489,11 @@ function Post({
                     </button>
                     <button
                       type="button"
-                      className="btn-icons"
+                      className={
+                        options.includes("valeur-bouton3")
+                          ? "btn-icons toggleIcons"
+                          : "btn-icons"
+                      }
                       data-value="valeur-bouton3"
                       onClick={handleicons}
                     >
@@ -499,7 +511,11 @@ function Post({
                     </button>
                     <button
                       type="button"
-                      className="btn-icons"
+                      className={
+                        options.includes("valeur-bouton4")
+                          ? "btn-icons toggleIcons"
+                          : "btn-icons"
+                      }
                       data-value="valeur-bouton4"
                       onClick={handleicons}
                     >
