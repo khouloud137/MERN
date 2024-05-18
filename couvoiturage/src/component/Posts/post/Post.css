@@ -29,6 +29,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .postPicture {
@@ -60,7 +61,7 @@
   min-height: 200px;
   position: relative;
 }
-.post_content_details::after {
+.post_content_details::before {
   content: "";
   background-image: url("https://freepngimg.com/download/icon/seo/442-announcement.png");
   background-position: center;
@@ -138,6 +139,7 @@
   align-items: center;
   justify-content: space-around;
   gap: 10px;
+  z-index: 1;
 }
 
 .post_content_details span input {
@@ -169,6 +171,9 @@
 .toggleBtn {
   color: #0da100;
   border: 1px #0da100 solid;
+}
+.postOptions .toggleIcons svg {
+  color: #0da100;
 }
 .PostConfigBtns {
   margin-left: auto;

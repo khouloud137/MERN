@@ -28,6 +28,7 @@
   border: none;
   outline: none;
   resize: none;
+  background-color: transparent;
 }
 .new_post_textbox textarea::placeholder {
   color: rgb(145, 142, 142);

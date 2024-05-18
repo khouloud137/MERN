@@ -8,7 +8,7 @@ function ModalSearch({ toggleSearch }) {
     <div className="search">
       <div className="ModalSearch">
         <input type="text" placeholder="Entrer votre recherche..."  />
-        <input type="text" placeholder="Entrer votre recherche..." />
+        {/* <input type="text" placeholder="Entrer votre recherche..." /> */}
         <div className="ModalSearchBtn">
           <button type="submit">Valider</button>
           <button onClick={toggleSearch}>fermer</button>

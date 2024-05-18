@@ -74,7 +74,8 @@ function Register() {
   }
 
   return (
-    <div className="register">
+    <>
+      {" "}
       <video
         id="bgvid"
         autoPlay
@@ -82,137 +83,140 @@ function Register() {
         muted
         src="https://videos.pexels.com/video-files/4372788/4372788-uhd_3840_2024_24fps.mp4"
       />
-      <Toaster />
-      <div className="register-cover"></div>
-      <div className="register-content">
-        <div>
-          <h1>MON ESPACE</h1>
-        </div>
-        <div>
-          <form className="form">
-            <div className="form-group">
-              <label> first name </label>
-              <input
-                className="input"
-                type="text"
-                placeholder="type your firstname..."
-                onChange={(e) => {
-                  setUserRegister({
-                    ...userRegister,
-                    firstname: e.target.value,
-                  });
-                }}
-              />
-              {errors.firstname && (
-                <div
-                  className="authErrors"
-                  style={{ textAlign: "lefet", color: "orangered" }}
-                >
-                  {errors.firstname}
-                </div>
-              )}
-            </div>
+      <div className="register">
+        <Toaster />
+        <div className="register-cover"></div>
+        <div className="register-content">
+          <div>
+            <h1>MON ESPACE</h1>
+          </div>
+          <div>
+            <form className="form">
+              <div className="form-group">
+                <label> first name </label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="type your firstname..."
+                  onChange={(e) => {
+                    setUserRegister({
+                      ...userRegister,
+                      firstname: e.target.value,
+                    });
+                  }}
+                />
+                {errors.firstname && (
+                  <div
+                    className="authErrors"
+                    style={{ textAlign: "lefet", color: "orangered" }}
+                  >
+                    {errors.firstname}
+                  </div>
+                )}
+              </div>
 
-            <div className="form-group">
-              <label> Last name </label>
-              <input
-                className="input"
-                type="text"
-                placeholder="type your lastname..."
-                onChange={(e) => {
-                  setUserRegister({
-                    ...userRegister,
-                    lastname: e.target.value,
-                  });
-                }}
-              />
-              {errors.lastname && (
-                <div
-                  className="authErrors"
-                  style={{ textAlign: "lefet", color: "orangered" }}
-                >
-                  {errors.lastname}
-                </div>
-              )}
-            </div>
+              <div className="form-group">
+                <label> Last name </label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="type your lastname..."
+                  onChange={(e) => {
+                    setUserRegister({
+                      ...userRegister,
+                      lastname: e.target.value,
+                    });
+                  }}
+                />
+                {errors.lastname && (
+                  <div
+                    className="authErrors"
+                    style={{ textAlign: "lefet", color: "orangered" }}
+                  >
+                    {errors.lastname}
+                  </div>
+                )}
+              </div>
 
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                className="input"
-                type="email"
-                placeholder="type your email..."
-                onChange={(e) => {
-                  setUserRegister({ ...userRegister, email: e.target.value });
-                }}
-              />
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  className="input"
+                  type="email"
+                  placeholder="type your email..."
+                  onChange={(e) => {
+                    setUserRegister({ ...userRegister, email: e.target.value });
+                  }}
+                />
 
-              {errors.email && (
-                <div
-                  className="authErrors"
-                  style={{ textAlign: "lefet", color: "orangered" }}
-                >
-                  {errors.email}
-                </div>
-              )}
-            </div>
-            <div className="form-group">
-              <label>Password </label>
-              <input
-                className="input"
-                type="password"
-                placeholder="type your password..."
-                onChange={(e) => {
-                  setUserRegister({
-                    ...userRegister,
-                    password: e.target.value,
-                  });
-                }}
-              />
-              {errors.password && (
-                <div
-                  className="authErrors"
-                  style={{ textAlign: "lefet", color: "orangered" }}
-                >
-                  {errors.password}
-                </div>
-              )}
-            </div>
+                {errors.email && (
+                  <div
+                    className="authErrors"
+                    style={{ textAlign: "lefet", color: "orangered" }}
+                  >
+                    {errors.email}
+                  </div>
+                )}
+              </div>
+              <div className="form-group">
+                <label>Password </label>
+                <input
+                  className="input"
+                  type="password"
+                  placeholder="type your password..."
+                  onChange={(e) => {
+                    setUserRegister({
+                      ...userRegister,
+                      password: e.target.value,
+                    });
+                  }}
+                />
+                {errors.password && (
+                  <div
+                    className="authErrors"
+                    style={{ textAlign: "lefet", color: "orangered" }}
+                  >
+                    {errors.password}
+                  </div>
+                )}
+              </div>
 
-            <div className="form-group">
-              <label> Bio </label>
-              <textarea
-                type=""
-                placeholder="type your Bio..."
-                onChange={(e) => {
-                  setUserRegister({ ...userRegister, bio: e.target.value });
-                }}
-              ></textarea>
-              {errors.bio && (
-                <div
-                  className="authErrorsForBio"
-                  style={{ textAlign: "lefet", color: "orangered" }}
-                >
-                  {errors.bio}
-                </div>
-              )}
-            </div>
-            <p className="auth-linking">
-              if you have an acount already <Link to="/login">login here</Link>
-            </p>
-            <button
-              className="authBtn btn sigup"
-              onClick={(e) => handelRegister(e)}
-            >
-              Sign up
-            </button>
-          </form>
-          <Link to={"/"} className="backHomeBtn">
-            <b>Back home</b>
-          </Link>
+              <div className="form-group">
+                <label> Bio </label>
+                <textarea
+                  type=""
+                  placeholder="type your Bio..."
+                  onChange={(e) => {
+                    setUserRegister({ ...userRegister, bio: e.target.value });
+                  }}
+                ></textarea>
+                {errors.bio && (
+                  <div
+                    className="authErrorsForBio"
+                    style={{ textAlign: "lefet", color: "orangered" }}
+                  >
+                    {errors.bio}
+                  </div>
+                )}
+              </div>
+              <p className="auth-linking">
+                if you have an acount already{" "}
+                <Link to="/login">login here</Link>
+              </p>
+              <button
+                className="authBtn btn sigup"
+                onClick={(e) => handelRegister(e)}
+              >
+                Sign up
+              </button>
+            </form>
+            <Link to={"/"} className="backHomeBtn">
+              <b>Back home</b>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 export default Register;

@@ -3,8 +3,9 @@
   flex-direction: row;
 }
 .profile-container {
-  background-image: url("https://wallpapers.com/images/hd/bumpy-black-stone-wall-desktop-skqayl7uknzul226.jpg");
+  /* background-image: url("https://img.goodfon.com/original/1920x1200/a/18/linii-kraski-ugol-uzor-tekstura.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: fixed; */
+  min-height: 100vh;
 }

@@ -32,8 +32,8 @@ span.small {
 }
 #usernameLink {
   text-decoration: none;
-  color: #4f657d;
+  color: black;
 }
 #usernameLink:hover{
-   color: #283441;
+   color: #272727;
 }
