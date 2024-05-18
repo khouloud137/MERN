@@ -1,8 +1,9 @@
-
-/* .App{ 
-  background-color:#595959;
-
- } */
-.layout_app{
+.App {
+  background-image: url("https://wallpapers.com/images/hd/bumpy-black-stone-wall-desktop-skqayl7uknzul226.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.layout_app {
   display: flex;
 }
